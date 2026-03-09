@@ -136,7 +136,7 @@
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "Sentry, Backup Radio, InReach",
+              "prompt": "Backup Radio, InReach",
               "expectation": "In Plane",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
