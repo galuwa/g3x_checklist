@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>N89SF Checklist – Printable Card</title>
+<style>
+@page {
+  size: 5.5in 9in portrait;
+  margin: 0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 6.5pt;
+  line-height: 1.25;
+  color: #000;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Each side is one .page */
+.page {
+  width: 5.5in;
+  height: 9in;
+  padding: 0.06in;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0.5pt solid #888;
+}
+
+/* Horizontal aircraft-name banner */
+.sidebar {
+  background: #e8922e;
+  color: #fff;
+  font-weight: 900;
+  font-size: 14pt;
+  letter-spacing: 1pt;
+  text-align: center;
+  padding: 3pt 6pt;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8pt;
+}
+.sidebar .sub {
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* Horizontal page title bar */
+.page-header {
+  background: #1a3a5c;
+  color: #fff;
+  font-weight: 900;
+  font-size: 6pt;
+  text-align: center;
+  padding: 1.5pt 4pt;
+  flex: 0 0 auto;
+  letter-spacing: 0.5pt;
+  text-transform: uppercase;
+}
+
+/* Multi-column flow area */
+.columns {
+  flex: 1;
+  padding: 2pt;
+  column-gap: 3pt;
+  overflow: hidden;
+  /* fill columns left-to-right to their full height, don't balance */
+  column-fill: auto;
+}
+.front-cols { column-count: 3; font-size: 6.5pt; line-height: 1.25; }
+.back-cols  { column-count: 3; font-size: 6pt; line-height: 1.22; }
+
+/* Individual checklist box */
+.section {
+  break-inside: avoid;
+  border: 0.75pt solid #336;
+  border-radius: 2pt;
+  overflow: hidden;
+  margin-bottom: 3pt;
+}
+
+/* Normal (front) color scheme */
+.section.normal { background: #dce9f5; }
+.section.normal .section-title { background: #4a7ab5; color: #fff; }
+
+/* Emergency (back) color scheme */
+.section.emergency { background: #fef9c3; }
+.section.emergency .section-title { background: #c0392b; color: #fff; }
+
+/* Abnormal color scheme */
+.section.abnormal { background: #fef3c7; }
+.section.abnormal .section-title { background: #d97706; color: #fff; }
+
+.section-title {
+  font-size: 6.5pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 1.5pt 2pt;
+  letter-spacing: 0.3pt;
+}
+.back-cols .section-title { font-size: 6pt; padding: 1.2pt 2pt; }
+
+.section-body {
+  padding: 1.5pt 3pt 2pt 3pt;
+}
+
+/* Single checklist row */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5pt 0;
+}
+
+.row .prompt {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dot leaders */
+.row .dots {
+  flex: 1 0 3pt;
+  border-bottom: 0.4pt dotted #999;
+  margin: 0 1pt;
+  min-width: 3pt;
+  align-self: baseline;
+  position: relative;
+  top: -1.5pt;
+}
+
+.row .expect {
+  flex: 0 0 auto;
+  text-align: right;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Plaintext / note rows */
+.note-row {
+  font-weight: 800;
+  font-style: italic;
+  text-align: center;
+  padding: 0.5pt 0;
+  font-size: 5.5pt;
+  color: #444;
+}
+
+/* Frequency table */
+.freq-section { background: #f0e6d2; }
+.freq-section .section-title { background: #6b4c2a; color: #fff; }
+.freq-group { font-weight: 800; padding: 1pt 0 0.3pt; font-size: 5.5pt; color: #333; border-bottom: 0.4pt solid #b8a080; margin-top: 1pt; }
+.freq-group:first-child { margin-top: 0; }
+
+/* Screen preview helpers */
+@media screen {
+  body { background: #777; }
+  .page {
+    background: #fff;
+    margin: 10px auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,.4);
+  }
+}
+
+@media print {
+  .page { border: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- FRONT SIDE -->
+<div class="page">
+  <div class="sidebar">
+    Cardinal RG
+    <span class="sub">&mdash; N89SF Checklist</span>
+  </div>
+  <div class="page-header">Quick Reference Checklist</div>
+  <div class="columns front-cols">
+    <div class="section freq-section"><div class="section-title">Local Frequencies</div><div class="section-body"><div class="freq-group">KPAE – Paine Field</div><div class="row"><span class="prompt">ATIS</span><span class="dots"></span><span class="expect">128.650</span></div><div class="row"><span class="prompt">Ground</span><span class="dots"></span><span class="expect">121.800</span></div><div class="row"><span class="prompt">Tower E</span><span class="dots"></span><span class="expect">120.200</span></div><div class="row"><span class="prompt">Tower W</span><span class="dots"></span><span class="expect">132.950</span></div><div class="row"><span class="prompt">Approach</span><span class="dots"></span><span class="expect">128.500</span></div><div class="freq-group">KNUW – NAS Whidbey</div><div class="row"><span class="prompt">East</span><span class="dots"></span><span class="expect">120.700</span></div><div class="row"><span class="prompt">West</span><span class="dots"></span><span class="expect">118.200</span></div><div class="freq-group">KORS – Island CTAF</div><div class="row"><span class="prompt">CTAF</span><span class="dots"></span><span class="expect">128.250</span></div><div class="freq-group">KAWO – Arlington Muni</div><div class="row"><span class="prompt">CTAF</span><span class="dots"></span><span class="expect">122.725</span></div><div class="freq-group">KBVS – Skagit Regional</div><div class="row"><span class="prompt">CTAF</span><span class="dots"></span><span class="expect">123.075</span></div><div class="freq-group">Seattle Approach</div><div class="row"><span class="prompt">South</span><span class="dots"></span><span class="expect">119.200</span></div><div class="row"><span class="prompt">North</span><span class="dots"></span><span class="expect">128.500</span></div></div></div><div class="section normal"><div class="section-title">Before Starting Engine</div><div class="section-body"><div class="row"><span class="prompt">Tug Bolts</span><span class="dots"></span><span class="expect">Detatched</span></div>
+<div class="row"><span class="prompt">Walk Around</span><span class="dots"></span><span class="expect"> Completed</span></div>
+<div class="row"><span class="prompt">Fuel Sump</span><span class="dots"></span><span class="expect">If Fueled</span></div>
+<div class="row"><span class="prompt">Chocks, Baggage Door, Tie Downs</span><span class="dots"></span><span class="expect">Ready</span></div>
+<div class="note-row">Seat Belts, Air Flow, Fire, Egress/Emergency</div>
+<div class="note-row">Traffic, Questions?</div>
+<div class="row"><span class="prompt">Passenger Brief</span><span class="dots"></span><span class="expect">Completed</span></div>
+<div class="row"><span class="prompt">Seat Rails, Doors, &amp; Seat Belts</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Fuel Selector Valve</span><span class="dots"></span><span class="expect">Both</span></div>
+<div class="row"><span class="prompt">Avionics Master</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Circuit Breakers</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Brakes</span><span class="dots"></span><span class="expect">Test and Set</span></div>
+<div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Open</span></div>
+<div class="row"><span class="prompt">Landing Gear Lever</span><span class="dots"></span><span class="expect">Down</span></div>
+<div class="row"><span class="prompt">Headset &amp; Battery</span><span class="dots"></span><span class="expect">On &amp; Checked</span></div></div></div><div class="section normal"><div class="section-title">Engine Start</div><div class="section-body"><div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Idle Cutoff</span></div>
+<div class="row"><span class="prompt">Propeller</span><span class="dots"></span><span class="expect">High RPM</span></div>
+<div class="row"><span class="prompt">Avionics Backup</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Voltage</span><span class="dots"></span><span class="expect">12V</span></div>
+<div class="row"><span class="prompt">G3X Fuel Level</span><span class="dots"></span><span class="expect">Expected</span></div>
+<div class="row"><span class="prompt">Prime (If Required)</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">Throttle</span><span class="dots"></span><span class="expect">Open 1/4 Inch</span></div>
+<div class="row"><span class="prompt">Clear Prop &amp; Start</span><span class="dots"></span><span class="expect">Done</span></div>
+<div class="row"><span class="prompt">Throttle Setpoint</span><span class="dots"></span><span class="expect">1000 RPM</span></div>
+<div class="row"><span class="prompt">Oil Pressure</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Lean</span></div>
+<div class="row"><span class="prompt">Voltage</span><span class="dots"></span><span class="expect">14V</span></div>
+<div class="row"><span class="prompt">Manifold Pressure</span><span class="dots"></span><span class="expect">~12&quot;</span></div></div></div><div class="section normal"><div class="section-title">Post Engine Start</div><div class="section-body"><div class="note-row">Clean Up &amp; Avionics</div>
+<div class="row"><span class="prompt">Flaps</span><span class="dots"></span><span class="expect">Up</span></div>
+<div class="row"><span class="prompt">Avionics Master</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">GTN Database</span><span class="dots"></span><span class="expect">Verified</span></div>
+<div class="row"><span class="prompt">GTN CDI Test</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">GTN &amp; G3X Fuel Calc</span><span class="dots"></span><span class="expect">Correct</span></div>
+<div class="row"><span class="prompt">Autopilot PFT</span><span class="dots"></span><span class="expect">No Error</span></div>
+<div class="row"><span class="prompt">G3X FPL Source</span><span class="dots"></span><span class="expect">External GPS</span></div>
+<div class="row"><span class="prompt">Starlink Power</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">FlightStream Devices</span><span class="dots"></span><span class="expect">Connected</span></div>
+<div class="note-row">Clearance</div>
+<div class="row"><span class="prompt">ATIS/AWOS</span><span class="dots"></span><span class="expect">Received</span></div>
+<div class="row"><span class="prompt">G5 Baro Pressure</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">G3X Baro Pressure</span><span class="dots"></span><span class="expect">Verify</span></div>
+<div class="row"><span class="prompt">IFR Clearance</span><span class="dots"></span><span class="expect">Recorded</span></div>
+<div class="row"><span class="prompt">GPS Flight Plan</span><span class="dots"></span><span class="expect">Loaded</span></div>
+<div class="row"><span class="prompt">COM Radios</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">NAV Radios</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">Transponder</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="note-row">Taxi</div>
+<div class="note-row">Day: Beacon</div>
+<div class="note-row">Low Viz: Beacon, Nav, Land, Taxi</div>
+<div class="note-row">Night: Beacon, Nav, Taxi</div>
+<div class="row"><span class="prompt">Lights</span><span class="dots"></span><span class="expect">Configured</span></div>
+<div class="row"><span class="prompt">Taxi Wind Correction</span><span class="dots"></span><span class="expect">Applied</span></div>
+<div class="row"><span class="prompt">Taxi Clearance</span><span class="dots"></span><span class="expect">Obtained</span></div>
+<div class="row"><span class="prompt">Brakes</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="note-row">Instrument Checks</div>
+<div class="row"><span class="prompt">HSI Heading</span><span class="dots"></span><span class="expect">Aligned</span></div>
+<div class="row"><span class="prompt">Altimeter</span><span class="dots"></span><span class="expect">Within 75ft</span></div>
+<div class="row"><span class="prompt">Attitude Indicator</span><span class="dots"></span><span class="expect">Bank in Turns</span></div>
+<div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">0kts</span></div>
+<div class="row"><span class="prompt">Inclinometer</span><span class="dots"></span><span class="expect">Trend in Turns</span></div>
+<div class="row"><span class="prompt">Slip/Skid</span><span class="dots"></span><span class="expect">Slide Out in Turns</span></div>
+<div class="row"><span class="prompt">Vertical Speed</span><span class="dots"></span><span class="expect">0fpm</span></div>
+<div class="row"><span class="prompt">Compass Card</span><span class="dots"></span><span class="expect">Correct</span></div></div></div><div class="section normal"><div class="section-title">Engine Runup</div><div class="section-body"><div class="row"><span class="prompt">Parking Brake</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">Flight Controls</span><span class="dots"></span><span class="expect">Free &amp; Correct</span></div>
+<div class="row"><span class="prompt">Stabilizer and Rudder Trim</span><span class="dots"></span><span class="expect">Takeoff Setting</span></div>
+<div class="row"><span class="prompt">Oil Temp</span><span class="dots"></span><span class="expect">100F</span></div>
+<div class="note-row">Engine Check</div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Mostly Rich</span></div>
+<div class="row"><span class="prompt">Throttle</span><span class="dots"></span><span class="expect">1800 RPM Or Full Power</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">1350 EGT or Peak RPM</span></div>
+<div class="row"><span class="prompt">Magnetos</span><span class="dots"></span><span class="expect">150 Drop, 50 Diff</span></div>
+<div class="row"><span class="prompt">Cylinder EGT</span><span class="dots"></span><span class="expect">Consistent Rise &amp; Drop</span></div>
+<div class="note-row">Drop-off may signal a fouled spark plug</div>
+<div class="row"><span class="prompt">Propeller</span><span class="dots"></span><span class="expect">High to Low</span></div>
+<div class="row"><span class="prompt">Engine Instruments</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Idle Power</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Power &amp; Mixture</span><span class="dots"></span><span class="expect">Restore Idle</span></div></div></div><div class="section normal"><div class="section-title">Departure Preparation</div><div class="section-body"><div class="note-row">Autopilot</div>
+<div class="row"><span class="prompt">Autopilot Engage Test</span><span class="dots"></span><span class="expect">Begin</span></div>
+<div class="row"><span class="prompt">Heading Bug</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">Altitude Bug</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">AP Mode Configuration</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="note-row">Departure Configuration</div>
+<div class="row"><span class="prompt">G3X Instruments</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">G5 Instruments</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Alternate Static Source</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="row"><span class="prompt">Density Altitude Lean</span><span class="dots"></span><span class="expect">As Required</span></div>
+<div class="row"><span class="prompt">Flap Configuration</span><span class="dots"></span><span class="expect">Set &amp; Confirm 10deg</span></div>
+<div class="row"><span class="prompt">Loved Ones</span><span class="dots"></span><span class="expect">Message</span></div>
+<div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">As Required</span></div>
+<div class="row"><span class="prompt">Brief: Runway, Departure, Failures, Abort</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">Return Instrument Approach</span><span class="dots"></span><span class="expect">Brief</span></div>
+<div class="row"><span class="prompt">GoPro</span><span class="dots"></span><span class="expect">As Required</span></div>
+<div class="note-row">Normal: Rotate 55, 75, Gear, Flaps, 82</div>
+<div class="note-row">Perf: Rotate 50, 62, Clear, Gear, 70, Flaps</div>
+<div class="row"><span class="prompt">Brief Wind &amp; Special Takeoff</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="note-row">Ready for Takeoff</div>
+<div class="row"><span class="prompt">Autopilot</span><span class="dots"></span><span class="expect">Disconnected</span></div>
+<div class="note-row">Day: Beacon, Strobe</div>
+<div class="note-row">Low Viz: Beacon Strobe, Land, Taxi</div>
+<div class="note-row">Night: Beacon, Nav, Strobe, Land, Taxi</div>
+<div class="row"><span class="prompt">Lights</span><span class="dots"></span><span class="expect">Configured</span></div>
+<div class="row"><span class="prompt">Windows</span><span class="dots"></span><span class="expect">Closed</span></div>
+<div class="row"><span class="prompt">Flap Position</span><span class="dots"></span><span class="expect">Confirm</span></div>
+<div class="row"><span class="prompt">Clear Pattern</span><span class="dots"></span><span class="expect">Completed</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Rich</span></div></div></div><div class="section normal"><div class="section-title">Enroute Climb</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Open</span></div>
+<div class="row"><span class="prompt">Gas Tank Selector</span><span class="dots"></span><span class="expect">Both</span></div>
+<div class="row"><span class="prompt">Flaps &amp; Gear</span><span class="dots"></span><span class="expect">Retracted</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Sea Lvl EGT (1250-1300F)</span></div>
+<div class="row"><span class="prompt">Power</span><span class="dots"></span><span class="expect">Full Open &amp; Tightened</span></div>
+<div class="row"><span class="prompt">Propeller</span><span class="dots"></span><span class="expect">2500RPM above 5000ft</span></div>
+<div class="note-row">Delay power reduction until MP boost needed</div>
+<div class="row"><span class="prompt">Autopilot</span><span class="dots"></span><span class="expect">Above 800AGL</span></div>
+<div class="row"><span class="prompt">Cylinder Head Temps</span><span class="dots"></span><span class="expect">~380F, &lt;400F</span></div>
+<div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">90-100kts</span></div></div></div><div class="section normal"><div class="section-title">Cruise</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Closed</span></div>
+<div class="row"><span class="prompt">Gas Tank Fuel Selector</span><span class="dots"></span><span class="expect">As Required</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Lean For EGT</span></div>
+<div class="note-row">Throttle 24/25 (fuel) - RPM 23/24 efficiency</div>
+<div class="row"><span class="prompt">Power</span><span class="dots"></span><span class="expect">As Desired</span></div>
+<div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">As Required</span></div>
+<div class="note-row">Day: Beacon, Strobe</div>
+<div class="note-row">Low Viz: Beacon, Nav, Strobe</div>
+<div class="note-row">Night: Beacon, Nav, Strobe</div>
+<div class="row"><span class="prompt">Lights</span><span class="dots"></span><span class="expect">Configured</span></div></div></div><div class="section normal"><div class="section-title">Mountain Crossing</div><div class="section-body"><div class="row"><span class="prompt">Altitude 2000 &gt; Ridge + 1000/10kts</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Groundspeed Cross Check</span><span class="dots"></span><span class="expect">Done</span></div>
+<div class="row"><span class="prompt">Freezing Level &amp; Icing</span><span class="dots"></span><span class="expect">Assess</span></div>
+<div class="row"><span class="prompt">Alternates &amp; Outs Briefing</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">Lenticular, Rotor, &amp; Ridge Hugging Caps</span><span class="dots"></span><span class="expect">Look For</span></div></div></div><div class="section normal"><div class="section-title">VFR Approach</div><div class="section-body"><div class="row"><span class="prompt">Fuel Selector</span><span class="dots"></span><span class="expect">Both</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Enrichen if MP drops, Keep CHT &gt; 300</span></div>
+<div class="row"><span class="prompt">Approach Lighting</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">Radio Frequencies</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">Weather &amp; NOTAMS</span><span class="dots"></span><span class="expect">Received</span></div>
+<div class="row"><span class="prompt">Baro Setpoint</span><span class="dots"></span><span class="expect">Adjusted</span></div>
+<div class="row"><span class="prompt">Airspaces &amp; Clearance</span><span class="dots"></span><span class="expect">Received</span></div>
+<div class="row"><span class="prompt">Top of Descent</span><span class="dots"></span><span class="expect">Considered</span></div>
+<div class="row"><span class="prompt">Runway &amp; Pattern Entry</span><span class="dots"></span><span class="expect">Decided</span></div></div></div><div class="section normal"><div class="section-title">IFR Approach</div><div class="section-body"><div class="row"><span class="prompt">Fuel Selector</span><span class="dots"></span><span class="expect">Both</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Enrichen if MP drops, Keep CHT &gt; 300</span></div>
+<div class="row"><span class="prompt">Approach Lighting</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">Approach Plate Brief</span><span class="dots"></span><span class="expect">Completed</span></div>
+<div class="row"><span class="prompt">Visual Descent Point</span><span class="dots"></span><span class="expect">Known</span></div>
+<div class="row"><span class="prompt">Weather &amp; NOTAMs</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">Baro &amp; Minimums</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">COM Frequencies</span><span class="dots"></span><span class="expect">Configured</span></div>
+<div class="row"><span class="prompt">NAV Frequencies</span><span class="dots"></span><span class="expect">Configured</span></div>
+<div class="row"><span class="prompt">Approach Loaded &amp; Sequenced</span><span class="dots"></span><span class="expect">Completed</span></div>
+<div class="row"><span class="prompt">Vertical Track Minimum Altitude</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">Nav Station Morse</span><span class="dots"></span><span class="expect">Identified</span></div>
+<div class="row"><span class="prompt">Autopilot Approach Mode</span><span class="dots"></span><span class="expect">Annunciated</span></div>
+<div class="row"><span class="prompt">GPS Approach Mode</span><span class="dots"></span><span class="expect">Annunciated</span></div></div></div><div class="section normal"><div class="section-title">Clear Runway</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Open</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Lean</span></div>
+<div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">Up</span></div>
+<div class="row"><span class="prompt">Transponder</span><span class="dots"></span><span class="expect">Ground/Alt</span></div>
+<div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="note-row">Day: Beacon</div>
+<div class="note-row">Low Viz: Beacon, Nav, Land, Taxi</div>
+<div class="note-row">Night: Beacon, Nav, Taxi</div>
+<div class="row"><span class="prompt">Lights</span><span class="dots"></span><span class="expect">Configured</span></div>
+<div class="row"><span class="prompt">Flight Plan</span><span class="dots"></span><span class="expect">Closed</span></div></div></div><div class="section normal"><div class="section-title">Shutdown</div><div class="section-body"><div class="row"><span class="prompt">Tach/Hobbs</span><span class="dots"></span><span class="expect">Record</span></div>
+<div class="row"><span class="prompt">Cockpit GoPro</span><span class="dots"></span><span class="expect">Stop</span></div>
+<div class="row"><span class="prompt">Avionics</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Idle Cutoff</span></div>
+<div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Avionics Backup</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Starlink Power</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Light Switches</span><span class="dots"></span><span class="expect">Beacon Only</span></div></div></div>
+  </div>
+</div>
+
+<!-- BACK SIDE -->
+<div class="page">
+  <div class="sidebar" style="background:#c0392b;">
+    Cardinal RG
+    <span class="sub">&mdash; Emergency &amp; Abnormal</span>
+  </div>
+  <div class="page-header" style="background:#7f1d1d;">Emergency &amp; Abnormal Procedures</div>
+  <div class="columns back-cols">
+    <div class="section abnormal"><div class="section-title">IFR Required Reporting</div><div class="section-body"><div class="note-row">Missed Approach</div>
+<div class="note-row">True Airspeed 10kts, 5%</div>
+<div class="note-row">Reaching Holding Fix</div>
+<div class="note-row">VFR on Top - Altitude Change</div>
+<div class="note-row">(Non-Radar) ETA changed 2min</div>
+<div class="note-row">Leaving a holding fix</div>
+<div class="note-row">(Non-Radar) Outer Marker</div>
+<div class="note-row">(FAR) Unforcasted Weather</div>
+<div class="note-row">(FAR) Safety of Flight</div>
+<div class="note-row">Vacating an Altitude</div>
+<div class="note-row">(Non-Radar) Final Approach Fix</div>
+<div class="note-row">(FAR) Radio/Nav/Approach Equipment Failure</div>
+<div class="note-row">(FAR/Non-Radar) Comp Reporting Point</div>
+<div class="note-row">500fpm Climb Descent</div>
+<div class="row"><span class="prompt">Aircraft ID</span></div>
+<div class="row"><span class="prompt">Position</span></div>
+<div class="row"><span class="prompt">Time</span></div>
+<div class="row"><span class="prompt">Altitude</span></div>
+<div class="row"><span class="prompt">Type of Flight Plan</span></div>
+<div class="row"><span class="prompt">ETA and Name Next Report Fix</span></div>
+<div class="row"><span class="prompt">Name of Next Point on Route</span></div>
+<div class="row"><span class="prompt">Remarks</span></div></div></div><div class="section abnormal"><div class="section-title">Light Gun Ground</div><div class="section-body"><div class="row"><span class="prompt">Steady Green</span><span class="dots"></span><span class="expect">Cleared for Takeoff</span></div>
+<div class="row"><span class="prompt">Flashing Green</span><span class="dots"></span><span class="expect">Cleared for Taxi</span></div>
+<div class="row"><span class="prompt">Steady Red</span><span class="dots"></span><span class="expect">STOP!</span></div>
+<div class="row"><span class="prompt">Flashing Red</span><span class="dots"></span><span class="expect">Taxi Clear of Runway</span></div>
+<div class="row"><span class="prompt">Flashing White</span><span class="dots"></span><span class="expect">Return to Start</span></div>
+<div class="row"><span class="prompt">Alternating Red/Green</span><span class="dots"></span><span class="expect">Extreme Caution</span></div></div></div><div class="section abnormal"><div class="section-title">Light Gun Air</div><div class="section-body"><div class="row"><span class="prompt">Steady Green</span><span class="dots"></span><span class="expect">Cleared to Land</span></div>
+<div class="row"><span class="prompt">Flashing Green</span><span class="dots"></span><span class="expect">Return for Landing</span></div>
+<div class="row"><span class="prompt">Steady Red</span><span class="dots"></span><span class="expect">Give Way to Other Aircraft - Circle</span></div>
+<div class="row"><span class="prompt">Flashing Red</span><span class="dots"></span><span class="expect">Airport Unsafe - Do Not Land</span></div>
+<div class="row"><span class="prompt">Alternating Red/Green</span><span class="dots"></span><span class="expect">Exercise Extreme Caution</span></div></div></div><div class="section abnormal"><div class="section-title">Loss of GPS</div><div class="section-body"><div class="row"><span class="prompt">G3X Reversionary</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="row"><span class="prompt">Sentry</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="row"><span class="prompt">Vectors or direct VOR</span><span class="dots"></span><span class="expect">Ask</span></div>
+<div class="row"><span class="prompt">KTIW ILS 17 - OLM/SEA</span></div>
+<div class="row"><span class="prompt">KHIO ILS 13R - BTG</span></div></div></div><div class="section emergency"><div class="section-title">Engine Out</div><div class="section-body"><div class="row"><span class="prompt">Best Glide</span><span class="dots"></span><span class="expect">75 kts</span></div>
+<div class="row"><span class="prompt">Landing Site</span><span class="dots"></span><span class="expect">Select</span></div>
+<div class="row"><span class="prompt">Radio Emergency</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">Transponder Emergency</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">InReach Emergency</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="note-row">If Time Permits Troubleshooting</div>
+<div class="row"><span class="prompt">Fuel Quantity</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Fuel Shutoff</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Aux Fuel Pump</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Fuel Flow Indication</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="note-row">Prepare For Landing</div>
+<div class="row"><span class="prompt">Seats &amp; Seat Belts</span><span class="dots"></span><span class="expect">Adjust</span></div>
+<div class="row"><span class="prompt">Aux Fuel Pump</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cutoff</span></div>
+<div class="row"><span class="prompt">Fuel Shutoff Valve</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Approach</span><span class="dots"></span><span class="expect">75kts</span></div>
+<div class="row"><span class="prompt">Flaps</span><span class="dots"></span><span class="expect">Within Glide Distance</span></div>
+<div class="row"><span class="prompt">Gear</span><span class="dots"></span><span class="expect">Hard Field - Glide Distance</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Cabin Doors</span><span class="dots"></span><span class="expect">Unlatched</span></div></div></div><div class="section emergency"><div class="section-title">Ditching</div><div class="section-body"><div class="row"><span class="prompt">Heavy Objects</span><span class="dots"></span><span class="expect">Secure &amp; Jettison</span></div>
+<div class="row"><span class="prompt">Life Jackets</span><span class="dots"></span><span class="expect">Ready</span></div>
+<div class="row"><span class="prompt">Transmit Mayday</span><span class="dots"></span><span class="expect">Radio &amp; Transponder</span></div>
+<div class="row"><span class="prompt">High Winds/Heavy Seas</span><span class="dots"></span><span class="expect">Into Wind</span></div>
+<div class="row"><span class="prompt">Heavy Swells/Light Winds</span><span class="dots"></span><span class="expect">Parallel Swells</span></div>
+<div class="row"><span class="prompt">Gear</span><span class="dots"></span><span class="expect">Up</span></div>
+<div class="row"><span class="prompt">Flaps</span><span class="dots"></span><span class="expect">30</span></div>
+<div class="row"><span class="prompt">Power</span><span class="dots"></span><span class="expect">300fpm 60kts</span></div>
+<div class="row"><span class="prompt">Doors</span><span class="dots"></span><span class="expect">Unlatched</span></div>
+<div class="row"><span class="prompt">Face</span><span class="dots"></span><span class="expect">Cushion Impact</span></div>
+<div class="row"><span class="prompt">Vent Windows</span><span class="dots"></span><span class="expect">If Required</span></div></div></div><div class="section emergency"><div class="section-title">Lost Comms</div><div class="section-body"><div class="row"><span class="prompt">Frequencies</span><span class="dots"></span><span class="expect">Correct</span></div>
+<div class="row"><span class="prompt">Stuck Mic</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Cords</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Alternate Radio</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="row"><span class="prompt">Backup Radio</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="row"><span class="prompt">Squawk</span><span class="dots"></span><span class="expect">7600</span></div>
+<div class="row"><span class="prompt">Route</span><span class="dots"></span><span class="expect">Clearace, Vector, Expected, Filed</span></div>
+<div class="row"><span class="prompt">Altitude</span><span class="dots"></span><span class="expect">Assigned, MEA, Expected</span></div>
+<div class="row"><span class="prompt">Clearance Limit</span><span class="dots"></span><span class="expect">Fly</span></div></div></div><div class="section emergency"><div class="section-title">Manual Gear Extension</div><div class="section-body"><div class="row"><span class="prompt">Landing Gear Handle</span><span class="dots"></span><span class="expect">Down</span></div>
+<div class="row"><span class="prompt">Breaker</span><span class="dots"></span><span class="expect">Out</span></div>
+<div class="row"><span class="prompt">Hand Pump Cover</span><span class="dots"></span><span class="expect">Lift</span></div>
+<div class="row"><span class="prompt">Hand Pump</span><span class="dots"></span><span class="expect">Extend</span></div>
+<div class="row"><span class="prompt">Hand Pump</span><span class="dots"></span><span class="expect">Until Heavy</span></div>
+<div class="row"><span class="prompt">Gear Light</span><span class="dots"></span><span class="expect">Green</span></div>
+<div class="row"><span class="prompt">Pressure</span><span class="dots"></span><span class="expect">Relieve &amp; Stow</span></div>
+<div class="row"><span class="prompt">Breaker</span><span class="dots"></span><span class="expect">In</span></div></div></div><div class="section emergency"><div class="section-title">Icing</div><div class="section-body"><div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Altitude</span><span class="dots"></span><span class="expect">Change</span></div>
+<div class="row"><span class="prompt">Cabin Air</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Heater</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Defroster</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">RPM</span><span class="dots"></span><span class="expect">Increase</span></div>
+<div class="row"><span class="prompt">Plan Landing</span><span class="dots"></span><span class="expect">Nearest</span></div>
+<div class="note-row">If &lt;1 Inch</div>
+<div class="row"><span class="prompt">Flaps (No heavy accumulation)</span><span class="dots"></span><span class="expect">10</span></div>
+<div class="row"><span class="prompt">Forward Slip</span><span class="dots"></span><span class="expect">Visibility</span></div>
+<div class="row"><span class="prompt">Approach</span><span class="dots"></span><span class="expect">75-85</span></div>
+<div class="row"><span class="prompt">Landing Attitude</span><span class="dots"></span><span class="expect">Level</span></div></div></div><div class="section emergency"><div class="section-title">Engine Fire Flight</div><div class="section-body"><div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cutoff</span></div>
+<div class="row"><span class="prompt">Fuel Shutoff</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Glide Speed</span><span class="dots"></span><span class="expect">&gt;87</span></div>
+<div class="row"><span class="prompt">Cabin Heat &amp; Air</span><span class="dots"></span><span class="expect">Closed</span></div>
+<div class="row"><span class="prompt">Overhead Air</span><span class="dots"></span><span class="expect">Open</span></div>
+<div class="row"><span class="prompt">Landing Site</span><span class="dots"></span><span class="expect">Select</span></div>
+<div class="row"><span class="prompt">Fire Extinguisher</span><span class="dots"></span><span class="expect">As Needed</span></div>
+<div class="row"><span class="prompt">If Fire</span><span class="dots"></span><span class="expect">Speed Incombustable Mixture</span></div>
+<div class="row"><span class="prompt">Forced Landing</span><span class="dots"></span><span class="expect">Done</span></div>
+<div class="note-row">Do Not Attempt Restart</div></div></div><div class="section emergency"><div class="section-title">Electrical Fire Flight</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Vent Air</span><span class="dots"></span><span class="expect">Close</span></div>
+<div class="row"><span class="prompt">Switches Except Ignition</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Breakers</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Fire Extinguisher</span><span class="dots"></span><span class="expect">As Needed</span></div>
+<div class="row"><span class="prompt">Master</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Select Switches</span><span class="dots"></span><span class="expect">Short Delays</span></div>
+<div class="row"><span class="prompt">If Extinguised</span><span class="dots"></span><span class="expect">Open Vents</span></div></div></div><div class="section emergency"><div class="section-title">Engine Failure After Takeoff</div><div class="section-body"><div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">70</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cutoff</span></div>
+<div class="row"><span class="prompt">Fuel Selector Valve</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">As Required</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div></div></div><div class="section emergency"><div class="section-title">Precautionary Landing</div><div class="section-body"><div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">65</span></div>
+<div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">20</span></div>
+<div class="row"><span class="prompt">Selected Field</span><span class="dots"></span><span class="expect">Overfly</span></div>
+<div class="row"><span class="prompt">Radio and Electrical Switches</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Landing Gear (Not Rough/Soft)</span><span class="dots"></span><span class="expect">Down</span></div>
+<div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">30 Final</span></div>
+<div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">65</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Doors</span><span class="dots"></span><span class="expect">Unlatch</span></div>
+<div class="row"><span class="prompt">Touchdown</span><span class="dots"></span><span class="expect">Tail Low</span></div>
+<div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Brakes</span><span class="dots"></span><span class="expect">Heavy</span></div></div></div><div class="section emergency"><div class="section-title">Engine Start Fire</div><div class="section-body"><div class="row"><span class="prompt">Fuel Pump</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cut Off</span></div>
+<div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Parking Brake</span><span class="dots"></span><span class="expect">Release</span></div>
+<div class="row"><span class="prompt">Fire Extinguisher</span><span class="dots"></span><span class="expect">Obtain</span></div>
+<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Evacuate</span></div>
+<div class="row"><span class="prompt">Fire</span><span class="dots"></span><span class="expect">Extinguish</span></div>
+<div class="note-row">Push airplane from fire</div>
+<div class="row"><span class="prompt">Fire Damage</span><span class="dots"></span><span class="expect">Inspect</span></div></div></div><div class="section emergency"><div class="section-title">Cabin Fire</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Vents/Cabin Air/Heat</span><span class="dots"></span><span class="expect">Closed</span></div>
+<div class="row"><span class="prompt">Fire Extinguisher</span><span class="dots"></span><span class="expect">Use</span></div>
+<div class="row"><span class="prompt">Vent Cabin</span><span class="dots"></span><span class="expect">Done</span></div>
+<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Land</span></div></div></div><div class="section emergency"><div class="section-title">Wing FIre</div><div class="section-body"><div class="row"><span class="prompt">Nav Light</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Side Slip </span><span class="dots"></span><span class="expect">Flames Away From Tank</span></div>
+<div class="row"><span class="prompt">Land</span><span class="dots"></span><span class="expect">ASAP</span></div></div></div><div class="section emergency"><div class="section-title">Failed Gear Retract</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Gear Lever</span><span class="dots"></span><span class="expect">Up</span></div>
+<div class="row"><span class="prompt">Breakers</span><span class="dots"></span><span class="expect">In</span></div>
+<div class="row"><span class="prompt">Gear Light</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="row"><span class="prompt">Gear Lever</span><span class="dots"></span><span class="expect">Cycle</span></div>
+<div class="row"><span class="prompt">Gear Motor</span><span class="dots"></span><span class="expect">Ammeter</span></div></div></div><div class="section emergency"><div class="section-title">Gear Up Landing</div><div class="section-body"><div class="row"><span class="prompt">Gear Lever</span><span class="dots"></span><span class="expect">Up</span></div>
+<div class="row"><span class="prompt">Breaker</span><span class="dots"></span><span class="expect">In</span></div>
+<div class="row"><span class="prompt">Radio and Electrical Switches</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">30 Final</span></div>
+<div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">65</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Doors</span><span class="dots"></span><span class="expect">Unlatch</span></div>
+<div class="row"><span class="prompt">Touchdown</span><span class="dots"></span><span class="expect">Tail Low</span></div>
+<div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Evacuate</span></div></div></div><div class="section emergency"><div class="section-title">No Gear Indication</div><div class="section-body"><div class="row"><span class="prompt">Before Landing Check</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">Approach</span><span class="dots"></span><span class="expect">Normal</span></div>
+<div class="row"><span class="prompt">Gear Pressure</span><span class="dots"></span><span class="expect">Mantain</span></div>
+<div class="row"><span class="prompt">Landing</span><span class="dots"></span><span class="expect">Tail Low</span></div>
+<div class="row"><span class="prompt">Taxi</span><span class="dots"></span><span class="expect">Slow</span></div></div></div><div class="section emergency"><div class="section-title">Failed Nose Gear</div><div class="section-body"><div class="row"><span class="prompt">Moveable Load</span><span class="dots"></span><span class="expect">Move Back</span></div>
+<div class="row"><span class="prompt">Passenger</span><span class="dots"></span><span class="expect">Move Back</span></div>
+<div class="row"><span class="prompt">Before Landing Checklist</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">Runway</span><span class="dots"></span><span class="expect">Hard</span></div>
+<div class="row"><span class="prompt">Emergency Hand Pump</span><span class="dots"></span><span class="expect">Mantain Pressure</span></div>
+<div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">30</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Land</span><span class="dots"></span><span class="expect">Tail Low</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cutoff</span></div>
+<div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Fuel Selector Valve</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Attitude</span><span class="dots"></span><span class="expect">Hold Nose Up</span></div>
+<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Evacuate</span></div></div></div><div class="section emergency"><div class="section-title">Overvoltage Light</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Over-Voltage Light</span><span class="dots"></span><span class="expect">Check</span></div>
+<div class="note-row">If Light</div>
+<div class="row"><span class="prompt">Flight</span><span class="dots"></span><span class="expect">Terminate</span></div>
+<div class="row"><span class="prompt">Electrical Load</span><span class="dots"></span><span class="expect">Reduce</span></div></div></div><div class="section emergency"><div class="section-title">Discharge</div><div class="section-body"><div class="row"><span class="prompt">Alternator</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Nonessential Equipment</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Flight</span><span class="dots"></span><span class="expect">End</span></div></div></div>
+  </div>
+</div>
+
+</body>
+</html>
