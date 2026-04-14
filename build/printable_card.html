@@ -35,7 +35,7 @@ body {
 
 /* Horizontal aircraft-name banner */
 .sidebar {
-  background: #e8922e;
+  background: #000;
   color: #fff;
   font-weight: 900;
   font-size: 14pt;
@@ -56,7 +56,7 @@ body {
 
 /* Horizontal page title bar */
 .page-header {
-  background: #1a3a5c;
+  background: #000;
   color: #fff;
   font-weight: 900;
   font-size: 6pt;
@@ -76,38 +76,63 @@ body {
   /* fill columns left-to-right to their full height, don't balance */
   column-fill: auto;
 }
-.front-cols { column-count: 3; font-size: 6.5pt; line-height: 1.25; }
+.front-cols { column-count: 3; font-size: 5.5pt; line-height: 1.2; }
 .back-cols  { column-count: 3; font-size: 6pt; line-height: 1.22; }
 
 /* Individual checklist box */
 .section {
   break-inside: avoid;
-  border: 0.75pt solid #336;
+  border: 0.75pt solid #000;
   border-radius: 2pt;
   overflow: hidden;
   margin-bottom: 3pt;
+  position: relative;
 }
 
-/* Normal (front) color scheme */
-.section.normal { background: #dce9f5; }
-.section.normal .section-title { background: #4a7ab5; color: #fff; }
+/* Phase/type badge */
+.badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 5pt;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0.5pt 1.5pt;
+  background: #000;
+  color: #fff;
+  border-radius: 0 0 2pt 0;
+  z-index: 1;
+}
+
+/* Ground preflight */
+.section.preflight { background: #fff; }
+.section.preflight .section-title { background: #ddd; color: #000; }
+
+/* In flight */
+.section.inflight { background: #fff; }
+.section.inflight .section-title { background: #bbb; color: #000; }
+
+/* Landed */
+.section.landed { background: #fff; }
+.section.landed .section-title { background: #eee; color: #000; }
 
 /* Emergency (back) color scheme */
-.section.emergency { background: #fef9c3; }
-.section.emergency .section-title { background: #c0392b; color: #fff; }
+.section.emergency { background: #fff; }
+.section.emergency .section-title { background: #000; color: #fff; }
 
 /* Abnormal color scheme */
-.section.abnormal { background: #fef3c7; }
-.section.abnormal .section-title { background: #d97706; color: #fff; }
+.section.abnormal { background: #fff; }
+.section.abnormal .section-title { background: #555; color: #fff; }
 
 .section-title {
-  font-size: 6.5pt;
+  font-size: 5.5pt;
   font-weight: 800;
   text-transform: uppercase;
   text-align: center;
-  padding: 1.5pt 2pt;
+  padding: 1.2pt 2pt;
   letter-spacing: 0.3pt;
 }
+.front-cols .section-title { font-size: 5.5pt; }
 .back-cols .section-title { font-size: 6pt; padding: 1.2pt 2pt; }
 
 .section-body {
@@ -154,14 +179,26 @@ body {
   text-align: center;
   padding: 0.5pt 0;
   font-size: 5.5pt;
-  color: #444;
+  color: #333;
 }
 
-/* Frequency table */
-.freq-section { background: #f0e6d2; }
-.freq-section .section-title { background: #6b4c2a; color: #fff; }
-.freq-group { font-weight: 800; padding: 1pt 0 0.3pt; font-size: 5.5pt; color: #333; border-bottom: 0.4pt solid #b8a080; margin-top: 1pt; }
-.freq-group:first-child { margin-top: 0; }
+/* Compact frequency bar */
+.freq-bar {
+  background: #f5f5f5;
+  border-bottom: 0.75pt solid #999;
+  padding: 1.5pt 4pt;
+  font-size: 5pt;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 6pt;
+  flex: 0 0 auto;
+}
+.freq-grp { white-space: nowrap; }
+.freq-id { font-weight: 800; color: #000; margin-right: 2pt; }
+.freq-pair { margin-right: 3pt; }
+.freq-pair b { font-weight: 700; color: #333; }
 
 /* Screen preview helpers */
 @media screen {
@@ -182,13 +219,10 @@ body {
 
 <!-- FRONT SIDE -->
 <div class="page">
-  <div class="sidebar">
-    Cardinal RG
-    <span class="sub">&mdash; N89SF Checklist</span>
-  </div>
   <div class="page-header">Quick Reference Checklist</div>
+  <div class="freq-bar"><span class="freq-grp"><span class="freq-id">KPAE</span><span class="freq-pair"><b>ATIS</b> 128.65</span> <span class="freq-pair"><b>Gnd</b> 121.8</span> <span class="freq-pair"><b>Twr E</b> 120.2</span> <span class="freq-pair"><b>Twr W</b> 132.95</span> <span class="freq-pair"><b>App</b> 128.5</span></span><span class="freq-grp"><span class="freq-id">KNUW</span><span class="freq-pair"><b>E</b> 120.7</span> <span class="freq-pair"><b>W</b> 118.2</span></span><span class="freq-grp"><span class="freq-id">KORS</span><span class="freq-pair"><b>CTAF</b> 128.25</span></span><span class="freq-grp"><span class="freq-id">KAWO</span><span class="freq-pair"><b>CTAF</b> 122.725</span></span><span class="freq-grp"><span class="freq-id">KBVS</span><span class="freq-pair"><b>CTAF</b> 123.075</span></span><span class="freq-grp"><span class="freq-id">SEA App</span><span class="freq-pair"><b>S</b> 119.2</span> <span class="freq-pair"><b>N</b> 128.5</span></span></div>
   <div class="columns front-cols">
-    <div class="section freq-section"><div class="section-title">Local Frequencies</div><div class="section-body"><div class="freq-group">KPAE – Paine Field</div><div class="row"><span class="prompt">ATIS</span><span class="dots"></span><span class="expect">128.650</span></div><div class="row"><span class="prompt">Ground</span><span class="dots"></span><span class="expect">121.800</span></div><div class="row"><span class="prompt">Tower E</span><span class="dots"></span><span class="expect">120.200</span></div><div class="row"><span class="prompt">Tower W</span><span class="dots"></span><span class="expect">132.950</span></div><div class="row"><span class="prompt">Approach</span><span class="dots"></span><span class="expect">128.500</span></div><div class="freq-group">KNUW – NAS Whidbey</div><div class="row"><span class="prompt">East</span><span class="dots"></span><span class="expect">120.700</span></div><div class="row"><span class="prompt">West</span><span class="dots"></span><span class="expect">118.200</span></div><div class="freq-group">KORS – Island CTAF</div><div class="row"><span class="prompt">CTAF</span><span class="dots"></span><span class="expect">128.250</span></div><div class="freq-group">KAWO – Arlington Muni</div><div class="row"><span class="prompt">CTAF</span><span class="dots"></span><span class="expect">122.725</span></div><div class="freq-group">KBVS – Skagit Regional</div><div class="row"><span class="prompt">CTAF</span><span class="dots"></span><span class="expect">123.075</span></div><div class="freq-group">Seattle Approach</div><div class="row"><span class="prompt">South</span><span class="dots"></span><span class="expect">119.200</span></div><div class="row"><span class="prompt">North</span><span class="dots"></span><span class="expect">128.500</span></div></div></div><div class="section normal"><div class="section-title">Before Starting Engine</div><div class="section-body"><div class="row"><span class="prompt">Tug Bolts</span><span class="dots"></span><span class="expect">Detatched</span></div>
+    <div class="section preflight"><span class="badge">G</span><div class="section-title">Before Starting Engine</div><div class="section-body"><div class="row"><span class="prompt">Tug Bolts</span><span class="dots"></span><span class="expect">Detatched</span></div>
 <div class="row"><span class="prompt">Walk Around</span><span class="dots"></span><span class="expect"> Completed</span></div>
 <div class="row"><span class="prompt">Fuel Sump</span><span class="dots"></span><span class="expect">If Fueled</span></div>
 <div class="row"><span class="prompt">Chocks, Baggage Door, Tie Downs</span><span class="dots"></span><span class="expect">Ready</span></div>
@@ -202,7 +236,7 @@ body {
 <div class="row"><span class="prompt">Brakes</span><span class="dots"></span><span class="expect">Test and Set</span></div>
 <div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Open</span></div>
 <div class="row"><span class="prompt">Landing Gear Lever</span><span class="dots"></span><span class="expect">Down</span></div>
-<div class="row"><span class="prompt">Headset &amp; Battery</span><span class="dots"></span><span class="expect">On &amp; Checked</span></div></div></div><div class="section normal"><div class="section-title">Engine Start</div><div class="section-body"><div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Idle Cutoff</span></div>
+<div class="row"><span class="prompt">Headset &amp; Battery</span><span class="dots"></span><span class="expect">On &amp; Checked</span></div></div></div><div class="section preflight"><span class="badge">G</span><div class="section-title">Engine Start</div><div class="section-body"><div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Idle Cutoff</span></div>
 <div class="row"><span class="prompt">Propeller</span><span class="dots"></span><span class="expect">High RPM</span></div>
 <div class="row"><span class="prompt">Avionics Backup</span><span class="dots"></span><span class="expect">On</span></div>
 <div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">On</span></div>
@@ -215,7 +249,7 @@ body {
 <div class="row"><span class="prompt">Oil Pressure</span><span class="dots"></span><span class="expect">Check</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Lean</span></div>
 <div class="row"><span class="prompt">Voltage</span><span class="dots"></span><span class="expect">14V</span></div>
-<div class="row"><span class="prompt">Manifold Pressure</span><span class="dots"></span><span class="expect">~12&quot;</span></div></div></div><div class="section normal"><div class="section-title">Post Engine Start</div><div class="section-body"><div class="note-row">Clean Up &amp; Avionics</div>
+<div class="row"><span class="prompt">Manifold Pressure</span><span class="dots"></span><span class="expect">~12&quot;</span></div></div></div><div class="section preflight"><span class="badge">G</span><div class="section-title">Post Engine Start</div><div class="section-body"><div class="note-row">Clean Up &amp; Avionics</div>
 <div class="row"><span class="prompt">Flaps</span><span class="dots"></span><span class="expect">Up</span></div>
 <div class="row"><span class="prompt">Avionics Master</span><span class="dots"></span><span class="expect">On</span></div>
 <div class="row"><span class="prompt">GTN Database</span><span class="dots"></span><span class="expect">Verified</span></div>
@@ -250,7 +284,7 @@ body {
 <div class="row"><span class="prompt">Inclinometer</span><span class="dots"></span><span class="expect">Trend in Turns</span></div>
 <div class="row"><span class="prompt">Slip/Skid</span><span class="dots"></span><span class="expect">Slide Out in Turns</span></div>
 <div class="row"><span class="prompt">Vertical Speed</span><span class="dots"></span><span class="expect">0fpm</span></div>
-<div class="row"><span class="prompt">Compass Card</span><span class="dots"></span><span class="expect">Correct</span></div></div></div><div class="section normal"><div class="section-title">Engine Runup</div><div class="section-body"><div class="row"><span class="prompt">Parking Brake</span><span class="dots"></span><span class="expect">Set</span></div>
+<div class="row"><span class="prompt">Compass Card</span><span class="dots"></span><span class="expect">Correct</span></div></div></div><div class="section preflight"><span class="badge">G</span><div class="section-title">Engine Runup</div><div class="section-body"><div class="row"><span class="prompt">Parking Brake</span><span class="dots"></span><span class="expect">Set</span></div>
 <div class="row"><span class="prompt">Flight Controls</span><span class="dots"></span><span class="expect">Free &amp; Correct</span></div>
 <div class="row"><span class="prompt">Stabilizer and Rudder Trim</span><span class="dots"></span><span class="expect">Takeoff Setting</span></div>
 <div class="row"><span class="prompt">Oil Temp</span><span class="dots"></span><span class="expect">100F</span></div>
@@ -264,7 +298,7 @@ body {
 <div class="row"><span class="prompt">Propeller</span><span class="dots"></span><span class="expect">High to Low</span></div>
 <div class="row"><span class="prompt">Engine Instruments</span><span class="dots"></span><span class="expect">Checked</span></div>
 <div class="row"><span class="prompt">Idle Power</span><span class="dots"></span><span class="expect">Checked</span></div>
-<div class="row"><span class="prompt">Power &amp; Mixture</span><span class="dots"></span><span class="expect">Restore Idle</span></div></div></div><div class="section normal"><div class="section-title">Departure Preparation</div><div class="section-body"><div class="note-row">Autopilot</div>
+<div class="row"><span class="prompt">Power &amp; Mixture</span><span class="dots"></span><span class="expect">Restore Idle</span></div></div></div><div class="section preflight"><span class="badge">G</span><div class="section-title">Departure Preparation</div><div class="section-body"><div class="note-row">Autopilot</div>
 <div class="row"><span class="prompt">Autopilot Engage Test</span><span class="dots"></span><span class="expect">Begin</span></div>
 <div class="row"><span class="prompt">Heading Bug</span><span class="dots"></span><span class="expect">Set</span></div>
 <div class="row"><span class="prompt">Altitude Bug</span><span class="dots"></span><span class="expect">Set</span></div>
@@ -292,7 +326,7 @@ body {
 <div class="row"><span class="prompt">Windows</span><span class="dots"></span><span class="expect">Closed</span></div>
 <div class="row"><span class="prompt">Flap Position</span><span class="dots"></span><span class="expect">Confirm</span></div>
 <div class="row"><span class="prompt">Clear Pattern</span><span class="dots"></span><span class="expect">Completed</span></div>
-<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Rich</span></div></div></div><div class="section normal"><div class="section-title">Enroute Climb</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Open</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Rich</span></div></div></div><div class="section inflight"><span class="badge">F</span><div class="section-title">Enroute Climb</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Open</span></div>
 <div class="row"><span class="prompt">Gas Tank Selector</span><span class="dots"></span><span class="expect">Both</span></div>
 <div class="row"><span class="prompt">Flaps &amp; Gear</span><span class="dots"></span><span class="expect">Retracted</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Sea Lvl EGT (1250-1300F)</span></div>
@@ -301,7 +335,7 @@ body {
 <div class="note-row">Delay power reduction until MP boost needed</div>
 <div class="row"><span class="prompt">Autopilot</span><span class="dots"></span><span class="expect">Above 800AGL</span></div>
 <div class="row"><span class="prompt">Cylinder Head Temps</span><span class="dots"></span><span class="expect">~380F, &lt;400F</span></div>
-<div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">90-100kts</span></div></div></div><div class="section normal"><div class="section-title">Cruise</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Closed</span></div>
+<div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">90-100kts</span></div></div></div><div class="section inflight"><span class="badge">F</span><div class="section-title">Cruise</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Closed</span></div>
 <div class="row"><span class="prompt">Gas Tank Fuel Selector</span><span class="dots"></span><span class="expect">As Required</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Lean For EGT</span></div>
 <div class="note-row">Throttle 24/25 (fuel) - RPM 23/24 efficiency</div>
@@ -310,11 +344,7 @@ body {
 <div class="note-row">Day: Beacon, Strobe</div>
 <div class="note-row">Low Viz: Beacon, Nav, Strobe</div>
 <div class="note-row">Night: Beacon, Nav, Strobe</div>
-<div class="row"><span class="prompt">Lights</span><span class="dots"></span><span class="expect">Configured</span></div></div></div><div class="section normal"><div class="section-title">Mountain Crossing</div><div class="section-body"><div class="row"><span class="prompt">Altitude 2000 &gt; Ridge + 1000/10kts</span><span class="dots"></span><span class="expect">Checked</span></div>
-<div class="row"><span class="prompt">Groundspeed Cross Check</span><span class="dots"></span><span class="expect">Done</span></div>
-<div class="row"><span class="prompt">Freezing Level &amp; Icing</span><span class="dots"></span><span class="expect">Assess</span></div>
-<div class="row"><span class="prompt">Alternates &amp; Outs Briefing</span><span class="dots"></span><span class="expect">Complete</span></div>
-<div class="row"><span class="prompt">Lenticular, Rotor, &amp; Ridge Hugging Caps</span><span class="dots"></span><span class="expect">Look For</span></div></div></div><div class="section normal"><div class="section-title">VFR Approach</div><div class="section-body"><div class="row"><span class="prompt">Fuel Selector</span><span class="dots"></span><span class="expect">Both</span></div>
+<div class="row"><span class="prompt">Lights</span><span class="dots"></span><span class="expect">Configured</span></div></div></div><div class="section inflight"><span class="badge">F</span><div class="section-title">VFR Approach</div><div class="section-body"><div class="row"><span class="prompt">Fuel Selector</span><span class="dots"></span><span class="expect">Both</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Enrichen if MP drops, Keep CHT &gt; 300</span></div>
 <div class="row"><span class="prompt">Approach Lighting</span><span class="dots"></span><span class="expect">Set</span></div>
 <div class="row"><span class="prompt">Radio Frequencies</span><span class="dots"></span><span class="expect">Set</span></div>
@@ -322,7 +352,7 @@ body {
 <div class="row"><span class="prompt">Baro Setpoint</span><span class="dots"></span><span class="expect">Adjusted</span></div>
 <div class="row"><span class="prompt">Airspaces &amp; Clearance</span><span class="dots"></span><span class="expect">Received</span></div>
 <div class="row"><span class="prompt">Top of Descent</span><span class="dots"></span><span class="expect">Considered</span></div>
-<div class="row"><span class="prompt">Runway &amp; Pattern Entry</span><span class="dots"></span><span class="expect">Decided</span></div></div></div><div class="section normal"><div class="section-title">IFR Approach</div><div class="section-body"><div class="row"><span class="prompt">Fuel Selector</span><span class="dots"></span><span class="expect">Both</span></div>
+<div class="row"><span class="prompt">Runway &amp; Pattern Entry</span><span class="dots"></span><span class="expect">Decided</span></div></div></div><div class="section inflight"><span class="badge">F</span><div class="section-title">IFR Approach</div><div class="section-body"><div class="row"><span class="prompt">Fuel Selector</span><span class="dots"></span><span class="expect">Both</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Enrichen if MP drops, Keep CHT &gt; 300</span></div>
 <div class="row"><span class="prompt">Approach Lighting</span><span class="dots"></span><span class="expect">Set</span></div>
 <div class="row"><span class="prompt">Approach Plate Brief</span><span class="dots"></span><span class="expect">Completed</span></div>
@@ -335,7 +365,7 @@ body {
 <div class="row"><span class="prompt">Vertical Track Minimum Altitude</span><span class="dots"></span><span class="expect">Set</span></div>
 <div class="row"><span class="prompt">Nav Station Morse</span><span class="dots"></span><span class="expect">Identified</span></div>
 <div class="row"><span class="prompt">Autopilot Approach Mode</span><span class="dots"></span><span class="expect">Annunciated</span></div>
-<div class="row"><span class="prompt">GPS Approach Mode</span><span class="dots"></span><span class="expect">Annunciated</span></div></div></div><div class="section normal"><div class="section-title">Clear Runway</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Open</span></div>
+<div class="row"><span class="prompt">GPS Approach Mode</span><span class="dots"></span><span class="expect">Annunciated</span></div></div></div><div class="section landed"><span class="badge">L</span><div class="section-title">Clear Runway</div><div class="section-body"><div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Open</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Lean</span></div>
 <div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">Up</span></div>
 <div class="row"><span class="prompt">Transponder</span><span class="dots"></span><span class="expect">Ground/Alt</span></div>
@@ -344,7 +374,7 @@ body {
 <div class="note-row">Low Viz: Beacon, Nav, Land, Taxi</div>
 <div class="note-row">Night: Beacon, Nav, Taxi</div>
 <div class="row"><span class="prompt">Lights</span><span class="dots"></span><span class="expect">Configured</span></div>
-<div class="row"><span class="prompt">Flight Plan</span><span class="dots"></span><span class="expect">Closed</span></div></div></div><div class="section normal"><div class="section-title">Shutdown</div><div class="section-body"><div class="row"><span class="prompt">Tach/Hobbs</span><span class="dots"></span><span class="expect">Record</span></div>
+<div class="row"><span class="prompt">Flight Plan</span><span class="dots"></span><span class="expect">Closed</span></div></div></div><div class="section landed"><span class="badge">L</span><div class="section-title">Shutdown</div><div class="section-body"><div class="row"><span class="prompt">Tach/Hobbs</span><span class="dots"></span><span class="expect">Record</span></div>
 <div class="row"><span class="prompt">Cockpit GoPro</span><span class="dots"></span><span class="expect">Stop</span></div>
 <div class="row"><span class="prompt">Avionics</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Idle Cutoff</span></div>
@@ -358,47 +388,13 @@ body {
 
 <!-- BACK SIDE -->
 <div class="page">
-  <div class="sidebar" style="background:#c0392b;">
+  <div class="sidebar">
     Cardinal RG
     <span class="sub">&mdash; Emergency &amp; Abnormal</span>
   </div>
-  <div class="page-header" style="background:#7f1d1d;">Emergency &amp; Abnormal Procedures</div>
+  <div class="page-header">Emergency &amp; Abnormal Procedures</div>
   <div class="columns back-cols">
-    <div class="section abnormal"><div class="section-title">IFR Required Reporting</div><div class="section-body"><div class="note-row">Missed Approach</div>
-<div class="note-row">True Airspeed 10kts, 5%</div>
-<div class="note-row">Reaching Holding Fix</div>
-<div class="note-row">VFR on Top - Altitude Change</div>
-<div class="note-row">(Non-Radar) ETA changed 2min</div>
-<div class="note-row">Leaving a holding fix</div>
-<div class="note-row">(Non-Radar) Outer Marker</div>
-<div class="note-row">(FAR) Unforcasted Weather</div>
-<div class="note-row">(FAR) Safety of Flight</div>
-<div class="note-row">Vacating an Altitude</div>
-<div class="note-row">(Non-Radar) Final Approach Fix</div>
-<div class="note-row">(FAR) Radio/Nav/Approach Equipment Failure</div>
-<div class="note-row">(FAR/Non-Radar) Comp Reporting Point</div>
-<div class="note-row">500fpm Climb Descent</div>
-<div class="row"><span class="prompt">Aircraft ID</span></div>
-<div class="row"><span class="prompt">Position</span></div>
-<div class="row"><span class="prompt">Time</span></div>
-<div class="row"><span class="prompt">Altitude</span></div>
-<div class="row"><span class="prompt">Type of Flight Plan</span></div>
-<div class="row"><span class="prompt">ETA and Name Next Report Fix</span></div>
-<div class="row"><span class="prompt">Name of Next Point on Route</span></div>
-<div class="row"><span class="prompt">Remarks</span></div></div></div><div class="section abnormal"><div class="section-title">Light Gun Ground</div><div class="section-body"><div class="row"><span class="prompt">Steady Green</span><span class="dots"></span><span class="expect">Cleared for Takeoff</span></div>
-<div class="row"><span class="prompt">Flashing Green</span><span class="dots"></span><span class="expect">Cleared for Taxi</span></div>
-<div class="row"><span class="prompt">Steady Red</span><span class="dots"></span><span class="expect">STOP!</span></div>
-<div class="row"><span class="prompt">Flashing Red</span><span class="dots"></span><span class="expect">Taxi Clear of Runway</span></div>
-<div class="row"><span class="prompt">Flashing White</span><span class="dots"></span><span class="expect">Return to Start</span></div>
-<div class="row"><span class="prompt">Alternating Red/Green</span><span class="dots"></span><span class="expect">Extreme Caution</span></div></div></div><div class="section abnormal"><div class="section-title">Light Gun Air</div><div class="section-body"><div class="row"><span class="prompt">Steady Green</span><span class="dots"></span><span class="expect">Cleared to Land</span></div>
-<div class="row"><span class="prompt">Flashing Green</span><span class="dots"></span><span class="expect">Return for Landing</span></div>
-<div class="row"><span class="prompt">Steady Red</span><span class="dots"></span><span class="expect">Give Way to Other Aircraft - Circle</span></div>
-<div class="row"><span class="prompt">Flashing Red</span><span class="dots"></span><span class="expect">Airport Unsafe - Do Not Land</span></div>
-<div class="row"><span class="prompt">Alternating Red/Green</span><span class="dots"></span><span class="expect">Exercise Extreme Caution</span></div></div></div><div class="section abnormal"><div class="section-title">Loss of GPS</div><div class="section-body"><div class="row"><span class="prompt">G3X Reversionary</span><span class="dots"></span><span class="expect">Test</span></div>
-<div class="row"><span class="prompt">Sentry</span><span class="dots"></span><span class="expect">Test</span></div>
-<div class="row"><span class="prompt">Vectors or direct VOR</span><span class="dots"></span><span class="expect">Ask</span></div>
-<div class="row"><span class="prompt">KTIW ILS 17 - OLM/SEA</span></div>
-<div class="row"><span class="prompt">KHIO ILS 13R - BTG</span></div></div></div><div class="section emergency"><div class="section-title">Engine Out</div><div class="section-body"><div class="row"><span class="prompt">Best Glide</span><span class="dots"></span><span class="expect">75 kts</span></div>
+    <div class="section emergency"><span class="badge">!</span><div class="section-title">Engine Out</div><div class="section-body"><div class="row"><span class="prompt">Best Glide</span><span class="dots"></span><span class="expect">75 kts</span></div>
 <div class="row"><span class="prompt">Landing Site</span><span class="dots"></span><span class="expect">Select</span></div>
 <div class="row"><span class="prompt">Radio Emergency</span><span class="dots"></span><span class="expect">Complete</span></div>
 <div class="row"><span class="prompt">Transponder Emergency</span><span class="dots"></span><span class="expect">Complete</span></div>
@@ -419,7 +415,7 @@ body {
 <div class="row"><span class="prompt">Flaps</span><span class="dots"></span><span class="expect">Within Glide Distance</span></div>
 <div class="row"><span class="prompt">Gear</span><span class="dots"></span><span class="expect">Hard Field - Glide Distance</span></div>
 <div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
-<div class="row"><span class="prompt">Cabin Doors</span><span class="dots"></span><span class="expect">Unlatched</span></div></div></div><div class="section emergency"><div class="section-title">Ditching</div><div class="section-body"><div class="row"><span class="prompt">Heavy Objects</span><span class="dots"></span><span class="expect">Secure &amp; Jettison</span></div>
+<div class="row"><span class="prompt">Cabin Doors</span><span class="dots"></span><span class="expect">Unlatched</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Ditching</div><div class="section-body"><div class="row"><span class="prompt">Heavy Objects</span><span class="dots"></span><span class="expect">Secure &amp; Jettison</span></div>
 <div class="row"><span class="prompt">Life Jackets</span><span class="dots"></span><span class="expect">Ready</span></div>
 <div class="row"><span class="prompt">Transmit Mayday</span><span class="dots"></span><span class="expect">Radio &amp; Transponder</span></div>
 <div class="row"><span class="prompt">High Winds/Heavy Seas</span><span class="dots"></span><span class="expect">Into Wind</span></div>
@@ -429,7 +425,7 @@ body {
 <div class="row"><span class="prompt">Power</span><span class="dots"></span><span class="expect">300fpm 60kts</span></div>
 <div class="row"><span class="prompt">Doors</span><span class="dots"></span><span class="expect">Unlatched</span></div>
 <div class="row"><span class="prompt">Face</span><span class="dots"></span><span class="expect">Cushion Impact</span></div>
-<div class="row"><span class="prompt">Vent Windows</span><span class="dots"></span><span class="expect">If Required</span></div></div></div><div class="section emergency"><div class="section-title">Lost Comms</div><div class="section-body"><div class="row"><span class="prompt">Frequencies</span><span class="dots"></span><span class="expect">Correct</span></div>
+<div class="row"><span class="prompt">Vent Windows</span><span class="dots"></span><span class="expect">If Required</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Lost Comms</div><div class="section-body"><div class="row"><span class="prompt">Frequencies</span><span class="dots"></span><span class="expect">Correct</span></div>
 <div class="row"><span class="prompt">Stuck Mic</span><span class="dots"></span><span class="expect">Check</span></div>
 <div class="row"><span class="prompt">Cords</span><span class="dots"></span><span class="expect">Check</span></div>
 <div class="row"><span class="prompt">Alternate Radio</span><span class="dots"></span><span class="expect">Test</span></div>
@@ -437,14 +433,14 @@ body {
 <div class="row"><span class="prompt">Squawk</span><span class="dots"></span><span class="expect">7600</span></div>
 <div class="row"><span class="prompt">Route</span><span class="dots"></span><span class="expect">Clearace, Vector, Expected, Filed</span></div>
 <div class="row"><span class="prompt">Altitude</span><span class="dots"></span><span class="expect">Assigned, MEA, Expected</span></div>
-<div class="row"><span class="prompt">Clearance Limit</span><span class="dots"></span><span class="expect">Fly</span></div></div></div><div class="section emergency"><div class="section-title">Manual Gear Extension</div><div class="section-body"><div class="row"><span class="prompt">Landing Gear Handle</span><span class="dots"></span><span class="expect">Down</span></div>
+<div class="row"><span class="prompt">Clearance Limit</span><span class="dots"></span><span class="expect">Fly</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Manual Gear Extension</div><div class="section-body"><div class="row"><span class="prompt">Landing Gear Handle</span><span class="dots"></span><span class="expect">Down</span></div>
 <div class="row"><span class="prompt">Breaker</span><span class="dots"></span><span class="expect">Out</span></div>
 <div class="row"><span class="prompt">Hand Pump Cover</span><span class="dots"></span><span class="expect">Lift</span></div>
 <div class="row"><span class="prompt">Hand Pump</span><span class="dots"></span><span class="expect">Extend</span></div>
 <div class="row"><span class="prompt">Hand Pump</span><span class="dots"></span><span class="expect">Until Heavy</span></div>
 <div class="row"><span class="prompt">Gear Light</span><span class="dots"></span><span class="expect">Green</span></div>
 <div class="row"><span class="prompt">Pressure</span><span class="dots"></span><span class="expect">Relieve &amp; Stow</span></div>
-<div class="row"><span class="prompt">Breaker</span><span class="dots"></span><span class="expect">In</span></div></div></div><div class="section emergency"><div class="section-title">Icing</div><div class="section-body"><div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Breaker</span><span class="dots"></span><span class="expect">In</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Icing</div><div class="section-body"><div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">On</span></div>
 <div class="row"><span class="prompt">Altitude</span><span class="dots"></span><span class="expect">Change</span></div>
 <div class="row"><span class="prompt">Cabin Air</span><span class="dots"></span><span class="expect">On</span></div>
 <div class="row"><span class="prompt">Heater</span><span class="dots"></span><span class="expect">On</span></div>
@@ -455,7 +451,7 @@ body {
 <div class="row"><span class="prompt">Flaps (No heavy accumulation)</span><span class="dots"></span><span class="expect">10</span></div>
 <div class="row"><span class="prompt">Forward Slip</span><span class="dots"></span><span class="expect">Visibility</span></div>
 <div class="row"><span class="prompt">Approach</span><span class="dots"></span><span class="expect">75-85</span></div>
-<div class="row"><span class="prompt">Landing Attitude</span><span class="dots"></span><span class="expect">Level</span></div></div></div><div class="section emergency"><div class="section-title">Engine Fire Flight</div><div class="section-body"><div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cutoff</span></div>
+<div class="row"><span class="prompt">Landing Attitude</span><span class="dots"></span><span class="expect">Level</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Engine Fire Flight</div><div class="section-body"><div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cutoff</span></div>
 <div class="row"><span class="prompt">Fuel Shutoff</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Glide Speed</span><span class="dots"></span><span class="expect">&gt;87</span></div>
@@ -465,19 +461,19 @@ body {
 <div class="row"><span class="prompt">Fire Extinguisher</span><span class="dots"></span><span class="expect">As Needed</span></div>
 <div class="row"><span class="prompt">If Fire</span><span class="dots"></span><span class="expect">Speed Incombustable Mixture</span></div>
 <div class="row"><span class="prompt">Forced Landing</span><span class="dots"></span><span class="expect">Done</span></div>
-<div class="note-row">Do Not Attempt Restart</div></div></div><div class="section emergency"><div class="section-title">Electrical Fire Flight</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="note-row">Do Not Attempt Restart</div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Electrical Fire Flight</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Vent Air</span><span class="dots"></span><span class="expect">Close</span></div>
 <div class="row"><span class="prompt">Switches Except Ignition</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Breakers</span><span class="dots"></span><span class="expect">Check</span></div>
 <div class="row"><span class="prompt">Fire Extinguisher</span><span class="dots"></span><span class="expect">As Needed</span></div>
 <div class="row"><span class="prompt">Master</span><span class="dots"></span><span class="expect">On</span></div>
 <div class="row"><span class="prompt">Select Switches</span><span class="dots"></span><span class="expect">Short Delays</span></div>
-<div class="row"><span class="prompt">If Extinguised</span><span class="dots"></span><span class="expect">Open Vents</span></div></div></div><div class="section emergency"><div class="section-title">Engine Failure After Takeoff</div><div class="section-body"><div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">70</span></div>
+<div class="row"><span class="prompt">If Extinguised</span><span class="dots"></span><span class="expect">Open Vents</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Engine Failure After Takeoff</div><div class="section-body"><div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">70</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cutoff</span></div>
 <div class="row"><span class="prompt">Fuel Selector Valve</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">As Required</span></div>
-<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div></div></div><div class="section emergency"><div class="section-title">Precautionary Landing</div><div class="section-body"><div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">65</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Precautionary Landing</div><div class="section-body"><div class="row"><span class="prompt">Airspeed</span><span class="dots"></span><span class="expect">65</span></div>
 <div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">20</span></div>
 <div class="row"><span class="prompt">Selected Field</span><span class="dots"></span><span class="expect">Overfly</span></div>
 <div class="row"><span class="prompt">Radio and Electrical Switches</span><span class="dots"></span><span class="expect">Off</span></div>
@@ -488,7 +484,7 @@ body {
 <div class="row"><span class="prompt">Doors</span><span class="dots"></span><span class="expect">Unlatch</span></div>
 <div class="row"><span class="prompt">Touchdown</span><span class="dots"></span><span class="expect">Tail Low</span></div>
 <div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
-<div class="row"><span class="prompt">Brakes</span><span class="dots"></span><span class="expect">Heavy</span></div></div></div><div class="section emergency"><div class="section-title">Engine Start Fire</div><div class="section-body"><div class="row"><span class="prompt">Fuel Pump</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Brakes</span><span class="dots"></span><span class="expect">Heavy</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Engine Start Fire</div><div class="section-body"><div class="row"><span class="prompt">Fuel Pump</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cut Off</span></div>
 <div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Parking Brake</span><span class="dots"></span><span class="expect">Release</span></div>
@@ -496,19 +492,19 @@ body {
 <div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Evacuate</span></div>
 <div class="row"><span class="prompt">Fire</span><span class="dots"></span><span class="expect">Extinguish</span></div>
 <div class="note-row">Push airplane from fire</div>
-<div class="row"><span class="prompt">Fire Damage</span><span class="dots"></span><span class="expect">Inspect</span></div></div></div><div class="section emergency"><div class="section-title">Cabin Fire</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Fire Damage</span><span class="dots"></span><span class="expect">Inspect</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Cabin Fire</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Vents/Cabin Air/Heat</span><span class="dots"></span><span class="expect">Closed</span></div>
 <div class="row"><span class="prompt">Fire Extinguisher</span><span class="dots"></span><span class="expect">Use</span></div>
 <div class="row"><span class="prompt">Vent Cabin</span><span class="dots"></span><span class="expect">Done</span></div>
-<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Land</span></div></div></div><div class="section emergency"><div class="section-title">Wing FIre</div><div class="section-body"><div class="row"><span class="prompt">Nav Light</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Land</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Wing FIre</div><div class="section-body"><div class="row"><span class="prompt">Nav Light</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Side Slip </span><span class="dots"></span><span class="expect">Flames Away From Tank</span></div>
-<div class="row"><span class="prompt">Land</span><span class="dots"></span><span class="expect">ASAP</span></div></div></div><div class="section emergency"><div class="section-title">Failed Gear Retract</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Land</span><span class="dots"></span><span class="expect">ASAP</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Failed Gear Retract</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">On</span></div>
 <div class="row"><span class="prompt">Gear Lever</span><span class="dots"></span><span class="expect">Up</span></div>
 <div class="row"><span class="prompt">Breakers</span><span class="dots"></span><span class="expect">In</span></div>
 <div class="row"><span class="prompt">Gear Light</span><span class="dots"></span><span class="expect">Check</span></div>
 <div class="row"><span class="prompt">Gear Lever</span><span class="dots"></span><span class="expect">Cycle</span></div>
-<div class="row"><span class="prompt">Gear Motor</span><span class="dots"></span><span class="expect">Ammeter</span></div></div></div><div class="section emergency"><div class="section-title">Gear Up Landing</div><div class="section-body"><div class="row"><span class="prompt">Gear Lever</span><span class="dots"></span><span class="expect">Up</span></div>
+<div class="row"><span class="prompt">Gear Motor</span><span class="dots"></span><span class="expect">Ammeter</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Gear Up Landing</div><div class="section-body"><div class="row"><span class="prompt">Gear Lever</span><span class="dots"></span><span class="expect">Up</span></div>
 <div class="row"><span class="prompt">Breaker</span><span class="dots"></span><span class="expect">In</span></div>
 <div class="row"><span class="prompt">Radio and Electrical Switches</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Wing Flaps</span><span class="dots"></span><span class="expect">30 Final</span></div>
@@ -517,11 +513,11 @@ body {
 <div class="row"><span class="prompt">Doors</span><span class="dots"></span><span class="expect">Unlatch</span></div>
 <div class="row"><span class="prompt">Touchdown</span><span class="dots"></span><span class="expect">Tail Low</span></div>
 <div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
-<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Evacuate</span></div></div></div><div class="section emergency"><div class="section-title">No Gear Indication</div><div class="section-body"><div class="row"><span class="prompt">Before Landing Check</span><span class="dots"></span><span class="expect">Complete</span></div>
+<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Evacuate</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">No Gear Indication</div><div class="section-body"><div class="row"><span class="prompt">Before Landing Check</span><span class="dots"></span><span class="expect">Complete</span></div>
 <div class="row"><span class="prompt">Approach</span><span class="dots"></span><span class="expect">Normal</span></div>
 <div class="row"><span class="prompt">Gear Pressure</span><span class="dots"></span><span class="expect">Mantain</span></div>
 <div class="row"><span class="prompt">Landing</span><span class="dots"></span><span class="expect">Tail Low</span></div>
-<div class="row"><span class="prompt">Taxi</span><span class="dots"></span><span class="expect">Slow</span></div></div></div><div class="section emergency"><div class="section-title">Failed Nose Gear</div><div class="section-body"><div class="row"><span class="prompt">Moveable Load</span><span class="dots"></span><span class="expect">Move Back</span></div>
+<div class="row"><span class="prompt">Taxi</span><span class="dots"></span><span class="expect">Slow</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Failed Nose Gear</div><div class="section-body"><div class="row"><span class="prompt">Moveable Load</span><span class="dots"></span><span class="expect">Move Back</span></div>
 <div class="row"><span class="prompt">Passenger</span><span class="dots"></span><span class="expect">Move Back</span></div>
 <div class="row"><span class="prompt">Before Landing Checklist</span><span class="dots"></span><span class="expect">Complete</span></div>
 <div class="row"><span class="prompt">Runway</span><span class="dots"></span><span class="expect">Hard</span></div>
@@ -533,14 +529,22 @@ body {
 <div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Fuel Selector Valve</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Attitude</span><span class="dots"></span><span class="expect">Hold Nose Up</span></div>
-<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Evacuate</span></div></div></div><div class="section emergency"><div class="section-title">Overvoltage Light</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Airplane</span><span class="dots"></span><span class="expect">Evacuate</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Overvoltage Light</div><div class="section-body"><div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">On</span></div>
 <div class="row"><span class="prompt">Over-Voltage Light</span><span class="dots"></span><span class="expect">Check</span></div>
 <div class="note-row">If Light</div>
 <div class="row"><span class="prompt">Flight</span><span class="dots"></span><span class="expect">Terminate</span></div>
-<div class="row"><span class="prompt">Electrical Load</span><span class="dots"></span><span class="expect">Reduce</span></div></div></div><div class="section emergency"><div class="section-title">Discharge</div><div class="section-body"><div class="row"><span class="prompt">Alternator</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Electrical Load</span><span class="dots"></span><span class="expect">Reduce</span></div></div></div><div class="section emergency"><span class="badge">!</span><div class="section-title">Discharge</div><div class="section-body"><div class="row"><span class="prompt">Alternator</span><span class="dots"></span><span class="expect">Off</span></div>
 <div class="row"><span class="prompt">Nonessential Equipment</span><span class="dots"></span><span class="expect">Off</span></div>
-<div class="row"><span class="prompt">Flight</span><span class="dots"></span><span class="expect">End</span></div></div></div>
+<div class="row"><span class="prompt">Flight</span><span class="dots"></span><span class="expect">End</span></div></div></div><div class="section abnormal"><span class="badge">?</span><div class="section-title">Light Gun Air</div><div class="section-body"><div class="row"><span class="prompt">Steady Green</span><span class="dots"></span><span class="expect">Cleared to Land</span></div>
+<div class="row"><span class="prompt">Flashing Green</span><span class="dots"></span><span class="expect">Return for Landing</span></div>
+<div class="row"><span class="prompt">Steady Red</span><span class="dots"></span><span class="expect">Give Way to Other Aircraft - Circle</span></div>
+<div class="row"><span class="prompt">Flashing Red</span><span class="dots"></span><span class="expect">Airport Unsafe - Do Not Land</span></div>
+<div class="row"><span class="prompt">Alternating Red/Green</span><span class="dots"></span><span class="expect">Exercise Extreme Caution</span></div></div></div><div class="section abnormal"><span class="badge">?</span><div class="section-title">Loss of GPS</div><div class="section-body"><div class="row"><span class="prompt">G3X Reversionary</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="row"><span class="prompt">Sentry</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="row"><span class="prompt">Vectors or direct VOR</span><span class="dots"></span><span class="expect">Ask</span></div>
+<div class="row"><span class="prompt">KTIW ILS 17 - OLM/SEA</span></div>
+<div class="row"><span class="prompt">KHIO ILS 13R - BTG</span></div></div></div>
   </div>
 </div>
 

@@ -19,7 +19,7 @@ BUILD_DIR = Path("build")
 BUILD_DIR.mkdir(exist_ok=True)
 
 # ── Which checklists go on which side ─────────────────────────────────
-# Front side: key normal procedures (skip big preflight walkaround stuff)
+# Front side: normal procedures
 FRONT_CHECKLISTS = [
     "Before Starting Engine",
     "Engine Start",
@@ -28,15 +28,37 @@ FRONT_CHECKLISTS = [
     "Departure Preparation",
     "Enroute Climb",
     "Cruise",
-    "Mountain Crossing",
     "VFR Approach",
     "IFR Approach",
     "Clear Runway",
     "Shutdown",
 ]
 
-# Back side: all emergency + abnormal
-BACK_GROUPS = ["Emergency", "Abnormal"]
+# Back side: emergency + abnormal procedures
+BACK_CHECKLISTS = [
+    # Emergency
+    "Engine Out",
+    "Ditching",
+    "Lost Comms",
+    "Manual Gear Extension",
+    "Icing",
+    "Engine Fire Flight",
+    "Electrical Fire Flight",
+    "Engine Failure After Takeoff",
+    "Precautionary Landing",
+    "Engine Start Fire",
+    "Cabin Fire",
+    "Wing FIre",
+    "Failed Gear Retract",
+    "Gear Up Landing",
+    "No Gear Indication",
+    "Failed Nose Gear",
+    "Overvoltage Light",
+    "Discharge",
+    # Abnormal
+    "Light Gun Air",
+    "Loss of GPS",
+]
 
 # ── CSS ───────────────────────────────────────────────────────────────
 STYLE = r"""
@@ -70,7 +92,7 @@ body {
 
 /* Horizontal aircraft-name banner */
 .sidebar {
-  background: #e8922e;
+  background: #000;
   color: #fff;
   font-weight: 900;
   font-size: 14pt;
@@ -91,7 +113,7 @@ body {
 
 /* Horizontal page title bar */
 .page-header {
-  background: #1a3a5c;
+  background: #000;
   color: #fff;
   font-weight: 900;
   font-size: 6pt;
@@ -111,38 +133,63 @@ body {
   /* fill columns left-to-right to their full height, don't balance */
   column-fill: auto;
 }
-.front-cols { column-count: 3; font-size: 6.5pt; line-height: 1.25; }
+.front-cols { column-count: 3; font-size: 5.5pt; line-height: 1.2; }
 .back-cols  { column-count: 3; font-size: 6pt; line-height: 1.22; }
 
 /* Individual checklist box */
 .section {
   break-inside: avoid;
-  border: 0.75pt solid #336;
+  border: 0.75pt solid #000;
   border-radius: 2pt;
   overflow: hidden;
   margin-bottom: 3pt;
+  position: relative;
 }
 
-/* Normal (front) color scheme */
-.section.normal { background: #dce9f5; }
-.section.normal .section-title { background: #4a7ab5; color: #fff; }
+/* Phase/type badge */
+.badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 5pt;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0.5pt 1.5pt;
+  background: #000;
+  color: #fff;
+  border-radius: 0 0 2pt 0;
+  z-index: 1;
+}
+
+/* Ground preflight */
+.section.preflight { background: #fff; }
+.section.preflight .section-title { background: #ddd; color: #000; }
+
+/* In flight */
+.section.inflight { background: #fff; }
+.section.inflight .section-title { background: #bbb; color: #000; }
+
+/* Landed */
+.section.landed { background: #fff; }
+.section.landed .section-title { background: #eee; color: #000; }
 
 /* Emergency (back) color scheme */
-.section.emergency { background: #fef9c3; }
-.section.emergency .section-title { background: #c0392b; color: #fff; }
+.section.emergency { background: #fff; }
+.section.emergency .section-title { background: #000; color: #fff; }
 
 /* Abnormal color scheme */
-.section.abnormal { background: #fef3c7; }
-.section.abnormal .section-title { background: #d97706; color: #fff; }
+.section.abnormal { background: #fff; }
+.section.abnormal .section-title { background: #555; color: #fff; }
 
 .section-title {
-  font-size: 6.5pt;
+  font-size: 5.5pt;
   font-weight: 800;
   text-transform: uppercase;
   text-align: center;
-  padding: 1.5pt 2pt;
+  padding: 1.2pt 2pt;
   letter-spacing: 0.3pt;
 }
+.front-cols .section-title { font-size: 5.5pt; }
 .back-cols .section-title { font-size: 6pt; padding: 1.2pt 2pt; }
 
 .section-body {
@@ -189,14 +236,26 @@ body {
   text-align: center;
   padding: 0.5pt 0;
   font-size: 5.5pt;
-  color: #444;
+  color: #333;
 }
 
-/* Frequency table */
-.freq-section { background: #f0e6d2; }
-.freq-section .section-title { background: #6b4c2a; color: #fff; }
-.freq-group { font-weight: 800; padding: 1pt 0 0.3pt; font-size: 5.5pt; color: #333; border-bottom: 0.4pt solid #b8a080; margin-top: 1pt; }
-.freq-group:first-child { margin-top: 0; }
+/* Compact frequency bar */
+.freq-bar {
+  background: #f5f5f5;
+  border-bottom: 0.75pt solid #999;
+  padding: 1.5pt 4pt;
+  font-size: 5pt;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 6pt;
+  flex: 0 0 auto;
+}
+.freq-grp { white-space: nowrap; }
+.freq-id { font-weight: 800; color: #000; margin-right: 2pt; }
+.freq-pair { margin-right: 3pt; }
+.freq-pair b { font-weight: 700; color: #333; }
 
 /* Screen preview helpers */
 @media screen {
@@ -235,11 +294,38 @@ def render_item(item):
     return f'<div class="row"><span class="prompt">{prompt}</span></div>'
 
 
+SECTION_EMOJI = {
+    "preflight": "G",
+    "inflight": "F",
+    "landed": "L",
+    "emergency": "!",
+    "abnormal": "?",
+}
+
+# Map each front checklist to a phase
+FRONT_PHASES = {
+    "Before Starting Engine": "preflight",
+    "Engine Start": "preflight",
+    "Post Engine Start": "preflight",
+    "Engine Runup": "preflight",
+    "Departure Preparation": "preflight",
+    "Enroute Climb": "inflight",
+    "Cruise": "inflight",
+    "VFR Approach": "inflight",
+    "IFR Approach": "inflight",
+    "Clear Runway": "landed",
+    "Shutdown": "landed",
+}
+
+
 def render_section(checklist, css_class="normal"):
     """Render a checklist section box."""
+    badge = SECTION_EMOJI.get(css_class, "")
+    badge_html = f'<span class="badge">{badge}</span>' if badge else ""
     items_html = "\n".join(render_item(i) for i in checklist["items"])
     return (
         f'<div class="section {css_class}">'
+        f'{badge_html}'
         f'<div class="section-title">{escape(checklist["title"])}</div>'
         f'<div class="section-body">{items_html}</div>'
         f'</div>'
@@ -248,52 +334,40 @@ def render_section(checklist, css_class="normal"):
 
 # ── Local frequencies ─────────────────────────────────────────────────
 FREQUENCIES = [
-    ("KPAE – Paine Field", [
-        ("ATIS", "128.650"),
-        ("Ground", "121.800"),
-        ("Tower E", "120.200"),
-        ("Tower W", "132.950"),
-        ("Approach", "128.500"),
+    ("KPAE", [
+        ("ATIS", "128.65"),
+        ("Gnd", "121.8"),
+        ("Twr E", "120.2"),
+        ("Twr W", "132.95"),
+        ("App", "128.5"),
     ]),
-    ("KNUW – NAS Whidbey", [
-        ("East", "120.700"),
-        ("West", "118.200"),
+    ("KNUW", [
+        ("E", "120.7"),
+        ("W", "118.2"),
     ]),
-    ("KORS – Island CTAF", [
-        ("CTAF", "128.250"),
+    ("KORS", [
+        ("CTAF", "128.25"),
     ]),
-    ("KAWO – Arlington Muni", [
+    ("KAWO", [
         ("CTAF", "122.725"),
     ]),
-    ("KBVS – Skagit Regional", [
+    ("KBVS", [
         ("CTAF", "123.075"),
     ]),
-    ("Seattle Approach", [
-        ("South", "119.200"),
-        ("North", "128.500"),
+    ("SEA App", [
+        ("S", "119.2"),
+        ("N", "128.5"),
     ]),
 ]
 
 
-def render_freq_section():
-    """Render a local frequencies reference box."""
-    rows = []
+def render_freq_bar():
+    """Render frequencies as a compact two-line horizontal bar."""
+    groups = []
     for group_name, freqs in FREQUENCIES:
-        rows.append(f'<div class="freq-group">{escape(group_name)}</div>')
-        for label, freq in freqs:
-            rows.append(
-                f'<div class="row">'
-                f'<span class="prompt">{escape(label)}</span>'
-                f'<span class="dots"></span>'
-                f'<span class="expect">{escape(freq)}</span>'
-                f'</div>'
-            )
-    return (
-        f'<div class="section freq-section">'
-        f'<div class="section-title">Local Frequencies</div>'
-        f'<div class="section-body">{"".join(rows)}</div>'
-        f'</div>'
-    )
+        pairs = " ".join(f'<span class="freq-pair"><b>{escape(label)}</b> {escape(freq)}</span>' for label, freq in freqs)
+        groups.append(f'<span class="freq-grp"><span class="freq-id">{escape(group_name)}</span>{pairs}</span>')
+    return f'<div class="freq-bar">{"".join(groups)}</div>'
 
 
 def build_front(data):
@@ -303,21 +377,28 @@ def build_front(data):
         for cl in g["checklists"]:
             cl_by_name[cl["title"]] = cl
 
-    sections = [render_freq_section()]
+    sections = []
     for name in FRONT_CHECKLISTS:
         if name in cl_by_name:
-            sections.append(render_section(cl_by_name[name], "normal"))
+            phase = FRONT_PHASES.get(name, "preflight")
+            sections.append(render_section(cl_by_name[name], phase))
     return sections
 
 
 def build_back(data):
     """Build back page with emergency & abnormal procedures."""
-    sections = []
+    cl_by_name = {}
+    group_for = {}
     for g in data["groups"]:
-        if g["title"] in BACK_GROUPS:
-            css = "emergency" if g["title"] == "Emergency" else "abnormal"
-            for cl in g["checklists"]:
-                sections.append(render_section(cl, css))
+        for cl in g["checklists"]:
+            cl_by_name[cl["title"]] = cl
+            group_for[cl["title"]] = g["title"]
+
+    sections = []
+    for name in BACK_CHECKLISTS:
+        if name in cl_by_name:
+            css = "emergency" if group_for[name] == "Emergency" else "abnormal"
+            sections.append(render_section(cl_by_name[name], css))
     return sections
 
 
@@ -341,11 +422,8 @@ def build_html(data):
 
 <!-- FRONT SIDE -->
 <div class="page">
-  <div class="sidebar">
-    {escape(aircraft)}
-    <span class="sub">&mdash; {escape(name)}</span>
-  </div>
   <div class="page-header">Quick Reference Checklist</div>
+  {render_freq_bar()}
   <div class="columns front-cols">
     {"".join(front_sections)}
   </div>
@@ -353,11 +431,11 @@ def build_html(data):
 
 <!-- BACK SIDE -->
 <div class="page">
-  <div class="sidebar" style="background:#c0392b;">
+  <div class="sidebar">
     {escape(aircraft)}
     <span class="sub">&mdash; Emergency &amp; Abnormal</span>
   </div>
-  <div class="page-header" style="background:#7f1d1d;">Emergency &amp; Abnormal Procedures</div>
+  <div class="page-header">Emergency &amp; Abnormal Procedures</div>
   <div class="columns back-cols">
     {"".join(back_sections)}
   </div>
