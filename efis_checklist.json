@@ -387,6 +387,11 @@
           "title": "Before Starting Engine",
           "items": [
             {
+              "prompt": "Wing Go Pro",
+              "expectation": "Reachable",
+              "type": "ITEM_CHALLENGE_RESPONSE"
+            },
+            {
               "prompt": "Tug Bolts",
               "expectation": "Detatched",
               "type": "ITEM_CHALLENGE_RESPONSE"
