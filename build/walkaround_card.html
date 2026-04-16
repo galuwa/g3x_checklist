@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>N89SF Checklist – Pre/Post-Flight Card</title>
+<style>
+@page {
+  size: 5.5in 9in portrait;
+  margin: 0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 6.5pt;
+  line-height: 1.25;
+  color: #000;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Each side is one .page */
+.page {
+  width: 5.5in;
+  height: 9in;
+  padding: 0.06in;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0.5pt solid #888;
+}
+
+/* Horizontal aircraft-name banner */
+.sidebar {
+  background: #000;
+  color: #fff;
+  font-weight: 900;
+  font-size: 14pt;
+  letter-spacing: 1pt;
+  text-align: center;
+  padding: 3pt 6pt;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8pt;
+}
+.sidebar .sub {
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* Horizontal page title bar */
+.page-header {
+  background: #000;
+  color: #fff;
+  font-weight: 900;
+  font-size: 6pt;
+  text-align: center;
+  padding: 1.5pt 4pt;
+  flex: 0 0 auto;
+  letter-spacing: 0.5pt;
+  text-transform: uppercase;
+}
+
+/* Multi-column flow area */
+.columns {
+  flex: 1;
+  padding: 2pt;
+  column-gap: 3pt;
+  overflow: hidden;
+  /* fill columns left-to-right to their full height, don't balance */
+  column-fill: auto;
+}
+.front-cols { column-count: 3; font-size: 5.5pt; line-height: 1.2; }
+.back-cols  { column-count: 3; font-size: 6pt; line-height: 1.22; }
+
+/* Individual checklist box */
+.section {
+  break-inside: avoid;
+  border: 0.75pt solid #000;
+  border-radius: 2pt;
+  overflow: hidden;
+  margin-bottom: 3pt;
+  position: relative;
+}
+
+/* Phase/type badge */
+.badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 5pt;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0.5pt 1.5pt;
+  background: #000;
+  color: #fff;
+  border-radius: 0 0 2pt 0;
+  z-index: 1;
+}
+
+/* Ground preflight */
+.section.preflight { background: #fff; }
+.section.preflight .section-title { background: #ddd; color: #000; }
+
+/* In flight */
+.section.inflight { background: #fff; }
+.section.inflight .section-title { background: #bbb; color: #000; }
+
+/* Landed */
+.section.landed { background: #fff; }
+.section.landed .section-title { background: #eee; color: #000; }
+
+/* Emergency (back) color scheme */
+.section.emergency { background: #fff; }
+.section.emergency .section-title { background: #000; color: #fff; }
+
+/* Abnormal color scheme */
+.section.abnormal { background: #fff; }
+.section.abnormal .section-title { background: #555; color: #fff; }
+
+/* Before flight (second card) */
+.section.before { background: #fff; }
+.section.before .section-title { background: #ddd; color: #000; }
+
+/* After flight (second card) */
+.section.after { background: #fff; }
+.section.after .section-title { background: #eee; color: #000; }
+
+.section-title {
+  font-size: 5.5pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 1.2pt 2pt;
+  letter-spacing: 0.3pt;
+}
+.front-cols .section-title { font-size: 5.5pt; }
+.back-cols .section-title { font-size: 6pt; padding: 1.2pt 2pt; }
+
+.section-body {
+  padding: 1.5pt 3pt 2pt 3pt;
+}
+
+/* Single checklist row */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5pt 0;
+}
+
+.row .prompt {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dot leaders */
+.row .dots {
+  flex: 1 0 3pt;
+  border-bottom: 0.4pt dotted #999;
+  margin: 0 1pt;
+  min-width: 3pt;
+  align-self: baseline;
+  position: relative;
+  top: -1.5pt;
+}
+
+.row .expect {
+  flex: 0 1 auto;
+  text-align: right;
+  font-weight: 700;
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 55%;
+}
+
+/* Plaintext / note rows */
+.note-row {
+  font-weight: 800;
+  font-style: italic;
+  text-align: center;
+  padding: 0.5pt 0;
+  font-size: 5.5pt;
+  color: #333;
+}
+
+/* Compact frequency bar */
+.freq-bar {
+  background: #f5f5f5;
+  border-bottom: 0.75pt solid #999;
+  padding: 1.5pt 4pt;
+  font-size: 5pt;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 6pt;
+  flex: 0 0 auto;
+}
+.freq-grp { white-space: nowrap; }
+.freq-id { font-weight: 800; color: #000; margin-right: 2pt; }
+.freq-pair { margin-right: 3pt; }
+.freq-pair b { font-weight: 700; color: #333; }
+
+/* Screen preview helpers */
+@media screen {
+  body { background: #777; }
+  .page {
+    background: #fff;
+    margin: 10px auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,.4);
+  }
+}
+
+@media print {
+  .page { border: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="page-header">Pre &amp; Post-Flight Checklist</div>
+  <div class="columns front-cols">
+    <div class="section before"><span class="badge">B</span><div class="section-title">Flight Planning</div><div class="section-body"><div class="row"><span class="prompt">Pilot Currency</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Aircraft Inspection &amp; Performance</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">VFR/IFR Flight Plan</span><span class="dots"></span><span class="expect">Filed</span></div>
+<div class="row"><span class="prompt">VOR Checks</span><span class="dots"></span><span class="expect">Performed</span></div>
+<div class="row"><span class="prompt">Contingency &amp; Outs</span><span class="dots"></span><span class="expect">Established</span></div>
+<div class="row"><span class="prompt">NWKRAFT</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Airport Chart Supplement</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Instrument Plates</span><span class="dots"></span><span class="expect">Reviewed</span></div>
+<div class="row"><span class="prompt">Weight &amp; Balance</span><span class="dots"></span><span class="expect">Performed</span></div>
+<div class="row"><span class="prompt">Animal Care Plan</span><span class="dots"></span><span class="expect">If Required</span></div>
+<div class="row"><span class="prompt">Checklist SD Cards</span><span class="dots"></span><span class="expect">If Required</span></div>
+<div class="row"><span class="prompt">Database SD Cards</span><span class="dots"></span><span class="expect">If Required</span></div>
+<div class="row"><span class="prompt">Batteries</span><span class="dots"></span><span class="expect">Charged</span></div></div></div><div class="section before"><span class="badge">B</span><div class="section-title">Aircraft Fluids</div><div class="section-body"><div class="row"><span class="prompt">Cover &amp; Tail Diaper</span><span class="dots"></span><span class="expect">Removed</span></div>
+<div class="row"><span class="prompt">Fuel Tank Sumps</span><span class="dots"></span><span class="expect">Sampled</span></div>
+<div class="row"><span class="prompt">Fuel Tank Level</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Fuel Vent Caps</span><span class="dots"></span><span class="expect">Secured</span></div>
+<div class="row"><span class="prompt">Pilot Seat Drain</span><span class="dots"></span><span class="expect">If Water Present</span></div>
+<div class="row"><span class="prompt">Engine Fuel Drain</span><span class="dots"></span><span class="expect">Pulled</span></div>
+<div class="row"><span class="prompt">Oil Level</span><span class="dots"></span><span class="expect">7 Nominal/8 for 3+ hours</span></div>
+<div class="row"><span class="prompt">Tire Pressures</span><span class="dots"></span><span class="expect">31 Nose, 68 Main</span></div>
+<div class="row"><span class="prompt">Windshield</span><span class="dots"></span><span class="expect">Cleaned</span></div></div></div><div class="section before"><span class="badge">B</span><div class="section-title">Cabin Check</div><div class="section-body"><div class="row"><span class="prompt">S.P.A.R.R.O.W</span><span class="dots"></span><span class="expect">Supp, Placs,Airworthy, Reg, Radio, POH, WB</span></div>
+<div class="row"><span class="prompt">Sentry, Backup Radio, InReach</span><span class="dots"></span><span class="expect">In Plane</span></div>
+<div class="row"><span class="prompt">Life Jackets</span><span class="dots"></span><span class="expect">Ready</span></div>
+<div class="row"><span class="prompt">Landing Gear Lever</span><span class="dots"></span><span class="expect">Down</span></div>
+<div class="row"><span class="prompt">Control Wheel Lock</span><span class="dots"></span><span class="expect">Removed</span></div>
+<div class="row"><span class="prompt">Ignition Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Avionics Backup</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Avionics Power</span><span class="dots"></span><span class="expect">If on Ground Power</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Gear Light</span><span class="dots"></span><span class="expect">Illuminated</span></div>
+<div class="row"><span class="prompt">Gear Horn</span><span class="dots"></span><span class="expect">Test</span></div>
+<div class="row"><span class="prompt">Flaps Down</span><span class="dots"></span><span class="expect">Fully Extended</span></div>
+<div class="row"><span class="prompt">Pitot Cover</span><span class="dots"></span><span class="expect">Removed</span></div>
+<div class="row"><span class="prompt">Lights &amp; Pitot Heat Switches</span><span class="dots"></span><span class="expect">Turned On</span></div>
+<div class="row"><span class="prompt">G3X &amp; G5</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Fuel Quantity Indicators</span><span class="dots"></span><span class="expect">Verified</span></div>
+<div class="row"><span class="prompt">Light Operation</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Stall Horn</span><span class="dots"></span><span class="expect">Tested</span></div>
+<div class="row"><span class="prompt">Pitot Heat</span><span class="dots"></span><span class="expect">Tested</span></div>
+<div class="row"><span class="prompt">Light Switches</span><span class="dots"></span><span class="expect">Reset</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div></div></div><div class="section before"><span class="badge">B</span><div class="section-title">Exterior Inspection</div><div class="section-body"><div class="note-row">Empennage</div>
+<div class="row"><span class="prompt">Tail Body</span><span class="dots"></span><span class="expect">Inspected</span></div>
+<div class="row"><span class="prompt">Stabilator</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Rudder</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="note-row">Right Wing</div>
+<div class="row"><span class="prompt">Right Aileron &amp; Flaps</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Right Fuel Bay Vent Opening</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Leading Edge &amp; Tip</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Right Main Tire</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Right Static Port</span><span class="dots"></span><span class="expect">Inspected</span></div>
+<div class="note-row">Nose</div>
+<div class="row"><span class="prompt">Cowl Plugs</span><span class="dots"></span><span class="expect">Removed</span></div>
+<div class="row"><span class="prompt">Alternator Belt</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Propeller &amp; Spinner</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Pitch Control</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Landing Lights</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Air Filter</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Exhaust Pipe</span><span class="dots"></span><span class="expect">Secured</span></div>
+<div class="row"><span class="prompt">Nose Wheel Strut</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Nose Wheel Tire</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Nose Wheel Doors</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Left Static Port</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="note-row">Left Wing</div>
+<div class="row"><span class="prompt">Leading Edge &amp; Tip</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Pitot Tube &amp; Cover</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Stall Warning</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Left Fuel Bay Vent Opening</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Left Aileron &amp; Flaps</span><span class="dots"></span><span class="expect">Checked</span></div>
+<div class="row"><span class="prompt">Left Main Tire</span><span class="dots"></span><span class="expect">Checked</span></div></div></div><div class="section after"><span class="badge">A</span><div class="section-title">Post Flight Checks</div><div class="section-body"><div class="row"><span class="prompt">Chocks</span><span class="dots"></span><span class="expect">Present</span></div>
+<div class="row"><span class="prompt">Parking Brake</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Tow Bar</span><span class="dots"></span><span class="expect">Away</span></div>
+<div class="row"><span class="prompt">Tie Downs</span><span class="dots"></span><span class="expect">Attached</span></div>
+<div class="row"><span class="prompt">Cabin Air</span><span class="dots"></span><span class="expect">Closed</span></div>
+<div class="row"><span class="prompt">Avionics Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Avionics Backup</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Master Switch</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Aux Pump</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Mags</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Control Lock</span><span class="dots"></span><span class="expect">Installed</span></div>
+<div class="row"><span class="prompt">Lights</span><span class="dots"></span><span class="expect">Beacon Only</span></div>
+<div class="row"><span class="prompt">Mixture</span><span class="dots"></span><span class="expect">Cutoff</span></div>
+<div class="row"><span class="prompt">Cowl Flaps</span><span class="dots"></span><span class="expect">Closed</span></div>
+<div class="row"><span class="prompt">Fuel Selector</span><span class="dots"></span><span class="expect">As Desired</span></div>
+<div class="row"><span class="prompt">Cabin Heat</span><span class="dots"></span><span class="expect">Off</span></div>
+<div class="row"><span class="prompt">Circuit Breakers</span><span class="dots"></span><span class="expect">Not Popped</span></div>
+<div class="row"><span class="prompt">Flaps</span><span class="dots"></span><span class="expect">Up</span></div>
+<div class="row"><span class="prompt">Windows</span><span class="dots"></span><span class="expect">Closed</span></div>
+<div class="row"><span class="prompt">Batteries, Sentry, Radio, InReach</span><span class="dots"></span><span class="expect">Removed</span></div>
+<div class="row"><span class="prompt">SD Cards</span><span class="dots"></span><span class="expect">Removed</span></div>
+<div class="row"><span class="prompt">Tach &amp; Hobbs</span><span class="dots"></span><span class="expect">Recorded</span></div>
+<div class="row"><span class="prompt">Side Pockets &amp; Glove Box</span><span class="dots"></span><span class="expect">Emptied</span></div>
+<div class="row"><span class="prompt">Pitot Cover</span><span class="dots"></span><span class="expect">Installed</span></div>
+<div class="row"><span class="prompt">Cowl Plugs</span><span class="dots"></span><span class="expect">Installed</span></div>
+<div class="row"><span class="prompt">Tail Diaper</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Airframe Cover</span><span class="dots"></span><span class="expect">On</span></div>
+<div class="row"><span class="prompt">Doors</span><span class="dots"></span><span class="expect">Locked</span></div>
+<div class="row"><span class="prompt">Walk Around</span><span class="dots"></span><span class="expect">Completed</span></div></div></div>
+  </div>
+</div>
+
+</body>
+</html>

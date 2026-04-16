@@ -34,6 +34,18 @@ FRONT_CHECKLISTS = [
     "Shutdown",
 ]
 
+# ── Second card: pre/post-flight checklists ──────────────────────────
+PREFLIGHT_CARD_CHECKLISTS = [
+    "Flight Planning",
+    "Aircraft Fluids",
+    "Cabin Check",
+    "Exterior Inspection",
+]
+
+POSTFLIGHT_CARD_CHECKLISTS = [
+    "Post Flight Checks",
+]
+
 # Back side: emergency + abnormal procedures
 BACK_CHECKLISTS = [
     # Emergency
@@ -181,6 +193,14 @@ body {
 .section.abnormal { background: #fff; }
 .section.abnormal .section-title { background: #555; color: #fff; }
 
+/* Before flight (second card) */
+.section.before { background: #fff; }
+.section.before .section-title { background: #ddd; color: #000; }
+
+/* After flight (second card) */
+.section.after { background: #fff; }
+.section.after .section-title { background: #eee; color: #000; }
+
 .section-title {
   font-size: 5.5pt;
   font-weight: 800;
@@ -223,10 +243,12 @@ body {
 }
 
 .row .expect {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   text-align: right;
   font-weight: 700;
-  white-space: nowrap;
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 55%;
 }
 
 /* Plaintext / note rows */
@@ -300,6 +322,8 @@ SECTION_EMOJI = {
     "landed": "L",
     "emergency": "!",
     "abnormal": "?",
+    "before": "B",
+    "after": "A",
 }
 
 # Map each front checklist to a phase
@@ -402,6 +426,44 @@ def build_back(data):
     return sections
 
 
+def build_walkaround_html(data):
+    meta = data.get("metadata", {})
+    name = meta.get("name", "Checklist")
+
+    cl_by_name = {}
+    for g in data["groups"]:
+        for cl in g["checklists"]:
+            cl_by_name[cl["title"]] = cl
+
+    sections = []
+    for n in PREFLIGHT_CARD_CHECKLISTS:
+        if n in cl_by_name:
+            sections.append(render_section(cl_by_name[n], "before"))
+    for n in POSTFLIGHT_CARD_CHECKLISTS:
+        if n in cl_by_name:
+            sections.append(render_section(cl_by_name[n], "after"))
+
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{escape(name)} – Pre/Post-Flight Card</title>
+<style>{STYLE}</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="page-header">Pre &amp; Post-Flight Checklist</div>
+  <div class="columns front-cols">
+    {"".join(sections)}
+  </div>
+</div>
+
+</body>
+</html>"""
+
+
 def build_html(data):
     meta = data.get("metadata", {})
     aircraft = meta.get("makeAndModel", "Aircraft")
@@ -447,10 +509,16 @@ def build_html(data):
 
 def main():
     data = load_data()
+
     html = build_html(data)
     out = BUILD_DIR / "printable_card.html"
     out.write_text(html, encoding="utf-8")
     print(f"Generated {out}")
+
+    html2 = build_walkaround_html(data)
+    out2 = BUILD_DIR / "walkaround_card.html"
+    out2.write_text(html2, encoding="utf-8")
+    print(f"Generated {out2}")
 
 
 if __name__ == "__main__":
