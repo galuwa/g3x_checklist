@@ -26,11 +26,6 @@
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "VOR Checks",
-              "expectation": "Performed",
-              "type": "ITEM_CHALLENGE_RESPONSE"
-            },
-            {
               "prompt": "Contingency & Outs",
               "expectation": "Established",
               "type": "ITEM_CHALLENGE_RESPONSE"
@@ -131,13 +126,23 @@
           "title": "Cabin Check",
           "items": [
             {
+              "prompt": "Pitot Cover",
+              "expectation": "Removed",
+              "type": "ITEM_CHALLENGE_RESPONSE"
+            },
+            {
               "prompt": "S.P.A.R.R.O.W",
               "expectation": "Supp, Placs,Airworthy, Reg, Radio, POH, WB",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "Sentry, Backup Radio, InReach",
-              "expectation": "In Plane",
+              "prompt": "InReach On",
+              "expectation": "Done",
+              "type": "ITEM_CHALLENGE_RESPONSE"
+            },
+            {
+              "prompt": "Backup Radio",
+              "expectation": "Accessible",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
@@ -188,11 +193,6 @@
             {
               "prompt": "Flaps Down",
               "expectation": "Fully Extended",
-              "type": "ITEM_CHALLENGE_RESPONSE"
-            },
-            {
-              "prompt": "Pitot Cover",
-              "expectation": "Removed",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
@@ -495,11 +495,6 @@
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "G3X Fuel Level",
-              "expectation": "Expected",
-              "type": "ITEM_CHALLENGE_RESPONSE"
-            },
-            {
               "prompt": "Prime (If Required)",
               "expectation": "Complete",
               "type": "ITEM_CHALLENGE_RESPONSE"
@@ -564,7 +559,7 @@
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "GTN CDI Test",
+              "prompt": "GTN Self Test",
               "expectation": "Complete",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
@@ -613,13 +608,13 @@
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "IFR Clearance",
-              "expectation": "Recorded",
+              "prompt": "GPS Flight Plan",
+              "expectation": "Loaded",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "GPS Flight Plan",
-              "expectation": "Loaded",
+              "prompt": "IFR Clearance",
+              "expectation": "Recorded",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
@@ -772,10 +767,6 @@
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "Drop-off may signal a fouled spark plug",
-              "type": "ITEM_PLAINTEXT"
-            },
-            {
               "prompt": "Propeller",
               "expectation": "High to Low",
               "type": "ITEM_CHALLENGE_RESPONSE"
@@ -829,12 +820,7 @@
               "type": "ITEM_PLAINTEXT"
             },
             {
-              "prompt": "G3X Instruments",
-              "expectation": "Checked",
-              "type": "ITEM_CHALLENGE_RESPONSE"
-            },
-            {
-              "prompt": "G5 Instruments",
+              "prompt": "G3X & G5 Instruments",
               "expectation": "Checked",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
@@ -918,13 +904,13 @@
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "Windows",
-              "expectation": "Closed",
+              "prompt": "Flap Position",
+              "expectation": "Confirm",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
-              "prompt": "Flap Position",
-              "expectation": "Confirm",
+              "prompt": "Windows",
+              "expectation": "Closed",
               "type": "ITEM_CHALLENGE_RESPONSE"
             },
             {
@@ -1054,6 +1040,11 @@
           "title": "Mountain Crossing",
           "items": [
             {
+              "prompt": "Wind at Ridgeline (20kts?)",
+              "expectation": "Check",
+              "type": "ITEM_CHALLENGE_RESPONSE"
+            },
+            {
               "prompt": "Altitude 2000 > Ridge + 1000/10kts",
               "expectation": "Checked",
               "type": "ITEM_CHALLENGE_RESPONSE"
@@ -1076,6 +1067,11 @@
             {
               "prompt": "Lenticular, Rotor, & Ridge Hugging Caps",
               "expectation": "Look For",
+              "type": "ITEM_CHALLENGE_RESPONSE"
+            },
+            {
+              "prompt": "Windward Side",
+              "expectation": "Take",
               "type": "ITEM_CHALLENGE_RESPONSE"
             }
           ]
